@@ -642,6 +642,70 @@
         }
     ];
 
+    const hardwareMatrixVisibleTurn = [
+        {
+            minHeight: 550, maxHeight: 1200,
+            minWidth: 390, maxWidth: 1000,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 2 },
+            ]
+        },
+        {
+            minHeight: 550, maxHeight: 1200,
+            minWidth: 1001, maxWidth: 1300,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 4 },
+                { article: 'KN100LI', name: 'Угловая передача без блокиратора', qty: 2 },
+            ]
+        },
+        {
+            minHeight: 1201, maxHeight: 1800,
+            minWidth: 390, maxWidth: 1000,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 3 },
+                { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 1 },
+            ]
+        },
+        {
+            minHeight: 1201, maxHeight: 1800,
+            minWidth: 1001, maxWidth: 1300,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 5 },
+                { article: 'KN100LI', name: 'Угловая передача без блокиратора', qty: 2 },
+                { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 1 },
+            ]
+        },
+        {
+            minHeight: 1801, maxHeight: 2400,
+            minWidth: 390, maxWidth: 1000,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 4 },
+                { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 2 },
+            ]
+        },
+        {
+            minHeight: 1801, maxHeight: 2400,
+            minWidth: 1001, maxWidth: 1300,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 1 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 6 },
+                { article: 'KN100LI', name: 'Угловая передача без блокиратора', qty: 2 },
+                { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 2 },
+            ]
+        }
+    ];
+
     const handleColorArticles = {
         white: [
             { article: 'KN100KR', name: 'Переходник под ручку Classic', qty: 1 },
@@ -660,6 +724,24 @@
             { article: 'KN218HN_C', name: 'Ручка Classic неокрашенная', qty: 1 },
             { article: 'KN219DL_C', name: 'Петля ПО верхняя неокрашенная', qty: 1 },
             { article: 'KN219DK_C', name: 'Петля ПО нижняя неокрашенная', qty: 1 }
+        ]
+    };
+
+    const handleColorArticlesTurnVisible = {
+        white: [
+            { article: 'KN100KR',      name: 'Переходник под ручку Classic', qty: 1 },
+            { article: 'KN218HN_9016', name: 'Ручка оконная Classic_9016',  qty: 1 },
+            { article: 'KN219CC_9016', name: 'Петля поворотная 3-хсекц.бел.', qty: 2 }
+        ],
+        black: [
+            { article: 'KN100KR',        name: 'Переходник под ручку Classic',          qty: 1 },
+            { article: 'KN218HN_9005M',  name: 'Ручка оконная Classic черн. Matt',      qty: 1 },
+            { article: 'KN219CC_9005M',  name: 'Петля поворотная 3-хсекц черн. matt',   qty: 2 }
+        ],
+        raw: [
+            { article: 'KN100KR',    name: 'Переходник под ручку Classic', qty: 1 },
+            { article: 'KN218HN_C',  name: 'Ручка оконная Classic неокр.', qty: 1 },
+            { article: 'KN219CC_C',  name: 'Петля поворотная 3-хсекц неокр', qty: 2 }
         ]
     };
 
@@ -683,8 +765,42 @@
             return null;
         }
 
-        if (openingType !== 'turn-tilt' || hardwareType !== 'visible') {
-            showMessage('Пока реализован только вариант: Видимая + Поворотно-откидной.', 'error');
+                if (hardwareType !== 'visible') {
+            showMessage('Пока реализованы только варианты с видимой фурнитурой.', 'error');
+            return null;
+        }
+
+        const resultArticles = [];
+
+        if (openingType === 'turn-tilt') {
+            // Видимая + Поворотно-откидной (как у тебя было)
+            const baseSet = pickVisibleTurnTiltSet(h, w);
+            if (!baseSet) {
+                showMessage('Под эти размеры нет настроенной зоны (П/О). Проверь диапазоны или обратись к менеджеру.', 'error');
+                return null;
+            }
+            baseSet.articles.forEach(item => resultArticles.push({ ...item }));
+
+            const colorArticles = handleColorArticles[handleColor] || handleColorArticles['white'];
+            colorArticles.forEach(item => resultArticles.push({ ...item }));
+        } else if (openingType === 'turn') {
+            // Видимая + Поворотный (новая логика)
+            const baseSet = hardwareMatrixVisibleTurn.find(row =>
+                h >= row.minHeight && h <= row.maxHeight &&
+                w >= row.minWidth && w <= row.maxWidth
+            );
+
+            if (!baseSet) {
+                showMessage('Под эти размеры нет настроенной зоны (Поворотный). Проверь диапазоны или обратись к менеджеру.', 'error');
+                return null;
+            }
+
+            baseSet.articles.forEach(item => resultArticles.push({ ...item }));
+
+            const colorArticles = handleColorArticlesTurnVisible[handleColor] || handleColorArticlesTurnVisible['white'];
+            colorArticles.forEach(item => resultArticles.push({ ...item }));
+        } else {
+            showMessage('Для этого типа открывания подбор ещё не реализован.', 'error');
             return null;
         }
 
