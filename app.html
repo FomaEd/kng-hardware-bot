@@ -756,16 +756,17 @@
         const h = Number(heightInput.value);
         const w = Number(widthInput.value);
         const wt = Number(weightInput.value);
-        const openingType = openingTypeSelect.value;
-        const hardwareType = hardwareTypeInput.value;
+        const openingType = openingTypeSelect.value; // 'turn-tilt' или 'turn'
+        const hardwareType = hardwareTypeInput.value; // 'visible'
         const clampSide = clampSideInput.value;
-        const handleColor = handleColorSelect.value || 'white';
+        const handleColor = handleColorSelect.value || 'white'; // 'white' | 'black' | 'raw'
 
         if (!validateInputs()) {
             return null;
         }
 
-                if (hardwareType !== 'visible') {
+        // пока работаем только с видимой фурнитурой
+        if (hardwareType !== 'visible') {
             showMessage('Пока реализованы только варианты с видимой фурнитурой.', 'error');
             return null;
         }
@@ -773,16 +774,18 @@
         const resultArticles = [];
 
         if (openingType === 'turn-tilt') {
-            // Видимая + Поворотно-откидной (как у тебя было)
+            // Видимая + Поворотно-откидной (твоя старая логика)
             const baseSet = pickVisibleTurnTiltSet(h, w);
             if (!baseSet) {
                 showMessage('Под эти размеры нет настроенной зоны (П/О). Проверь диапазоны или обратись к менеджеру.', 'error');
                 return null;
             }
+
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
             const colorArticles = handleColorArticles[handleColor] || handleColorArticles['white'];
             colorArticles.forEach(item => resultArticles.push({ ...item }));
+
         } else if (openingType === 'turn') {
             // Видимая + Поворотный (новая логика)
             const baseSet = hardwareMatrixVisibleTurn.find(row =>
@@ -799,23 +802,11 @@
 
             const colorArticles = handleColorArticlesTurnVisible[handleColor] || handleColorArticlesTurnVisible['white'];
             colorArticles.forEach(item => resultArticles.push({ ...item }));
+
         } else {
             showMessage('Для этого типа открывания подбор ещё не реализован.', 'error');
             return null;
         }
-
-        const baseSet = pickVisibleTurnTiltSet(h, w);
-        if (!baseSet) {
-            showMessage('Под эти размеры нет настроенной зоны. Проверь диапазоны или обратись к менеджеру.', 'error');
-            return null;
-        }
-
-        const resultArticles = [];
-
-        baseSet.articles.forEach(item => resultArticles.push({ ...item }));
-
-        const colorArticles = handleColorArticles[handleColor] || handleColorArticles['white'];
-        colorArticles.forEach(item => resultArticles.push({ ...item }));
 
         return {
             height: h,
