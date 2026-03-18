@@ -34,7 +34,7 @@
         }
 
         .app {
-            max-width: 520px;
+            max-width: 480px;
             margin: 0 auto;
             padding: 16px 16px 24px;
         }
@@ -42,7 +42,7 @@
         .card {
             background: rgba(255, 255, 255, 0.96);
             border-radius: 22px;
-            padding: 18px 16px 20px;
+            padding: 18px 14px 18px;
             box-shadow: var(--shadow-soft);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.8);
@@ -52,7 +52,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .logo-circle {
@@ -81,36 +81,17 @@
             letter-spacing: 0.01em;
         }
 
-        .subtitle {
-            margin: 4px 0 0;
-            font-size: 13px;
-            color: var(--color-muted);
-        }
-
-        .badge {
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: rgba(32, 128, 128, 0.07);
-            color: var(--color-primary);
-            border: 1px solid rgba(32, 128, 128, 0.18);
-        }
-
         .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 12px;
-            margin: 12px 0 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0 8px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 4px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
         }
 
         label {
@@ -138,22 +119,16 @@
             color: #9aa5b1;
         }
 
-        .helper-text {
-            font-size: 11px;
-            color: var(--color-muted);
-            margin-top: 2px;
-        }
-
         .toggle-row {
             display: flex;
             gap: 8px;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .toggle-chip {
             flex: 1;
             text-align: center;
-            padding: 6px 8px;
+            padding: 7px 8px;
             font-size: 12px;
             border-radius: 999px;
             border: 1px solid var(--color-border);
@@ -187,51 +162,28 @@
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent 0, #e1e7ef 25%, #e1e7ef 75%, transparent 100%);
-            margin: 8px 0 10px;
+            margin: 10px 0 10px;
         }
 
         .section-title {
             font-size: 13px;
             font-weight: 600;
             color: #4b5563;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .section-title span {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--color-muted);
-        }
-
-        .handle-badges {
-            display: flex;
-            gap: 6px;
-            margin-top: 5px;
-        }
-
-        .handle-badge {
-            font-size: 11px;
-            padding: 3px 7px;
-            border-radius: 999px;
-            border: 1px dashed rgba(32,128,128,0.5);
-            color: var(--color-primary);
+            margin-bottom: 6px;
         }
 
         .footer-row {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-top: 6px;
+            gap: 8px;
         }
 
-        .qty-chip {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            border: 1px solid var(--color-border);
-            background: #f9fafb;
+        .footer-row > .form-group {
+            flex: 1;
+        }
+
+        .qty-input-wrapper {
+            width: 90px;
         }
 
         .btn-row {
@@ -284,17 +236,28 @@
             margin-top: 6px;
             font-size: 12px;
             color: var(--color-muted);
-            text-align: right;
+            text-align: left;
         }
 
         .accumulated-counter strong {
             color: var(--color-primary);
         }
 
+        .accumulated-counter.flash {
+            animation: flashCount 0.4s ease;
+        }
+
+        @keyframes flashCount {
+            0% { color: var(--color-primary); transform: scale(1.0); }
+            50% { color: #0d9488; transform: scale(1.05); }
+            100% { color: var(--color-primary); transform: scale(1.0); }
+        }
+
         .message-box {
-            margin-top: 12px;
+            margin-top: 10px;
             font-size: 13px;
             line-height: 1.4;
+            min-height: 16px;
         }
 
         .message-box.error {
@@ -305,16 +268,10 @@
             color: #166534;
         }
 
-        .message-box small {
-            display: block;
-            margin-top: 4px;
-            color: var(--color-muted);
-        }
-
         @media (max-width: 400px) {
             .card {
                 border-radius: 20px;
-                padding: 16px 12px 18px;
+                padding: 16px 12px 16px;
             }
         }
     </style>
@@ -326,28 +283,24 @@
             <div class="logo-circle">K</div>
             <div class="header-text">
                 <p class="title">Подбор фурнитуры KNG</p>
-                <p class="subtitle">По размерам окна и типу створки</p>
             </div>
-            <div class="badge">v0.2 beta</div>
         </div>
 
         <form id="calcForm">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="height">Высота, мм</label>
-                    <input type="number" id="height" class="input" placeholder="Например, 1350" min="400" max="2600" required>
-                    <div class="helper-text">Допуск: 550–2400 мм (для этой таблицы)</div>
+                    <input type="number" id="height" class="input" placeholder="Например, 1350" min="550" max="2400" required>
                 </div>
+
                 <div class="form-group">
                     <label for="width">Ширина, мм</label>
                     <input type="number" id="width" class="input" placeholder="Например, 700" min="390" max="1200" required>
-                    <div class="helper-text">Диапазон: 390–1200 мм</div>
                 </div>
 
                 <div class="form-group">
                     <label for="weight">Вес створки, кг</label>
                     <input type="number" id="weight" class="input" placeholder="Например, 60" min="10" max="130" required>
-                    <div class="helper-text">Для видимой П/О: до 100 кг</div>
                 </div>
 
                 <div class="form-group">
@@ -358,7 +311,6 @@
                         <option value="tilt">Откидной</option>
                         <option value="stulp">Штульповый</option>
                     </select>
-                    <div class="helper-text">Сейчас работает только Поворотно-откидной</div>
                 </div>
 
                 <div class="form-group">
@@ -375,7 +327,6 @@
                         </div>
                     </div>
                     <input type="hidden" id="hardwareType" value="visible">
-                    <div class="helper-text">Эта таблица: Видимая + П/О</div>
                 </div>
 
                 <div class="form-group" id="clampSideGroup" style="display:none;">
@@ -391,44 +342,34 @@
                     <input type="hidden" id="clampSide" value="left">
                 </div>
 
-                <div class="form-group full">
-                    <div class="section-title">
-                        Форма и цвет ручки
-                        <span>Classic + 3 позиции по цвету</span>
+                <div class="section-divider"></div>
+
+                <div class="section-title">Форма и цвет ручки</div>
+                <div class="row-inline">
+                    <div class="form-group">
+                        <label for="handleType">Форма</label>
+                        <select id="handleType" class="select">
+                            <option value="classic" selected>Classic</option>
+                        </select>
                     </div>
-                    <div class="row-inline" style="margin-top:4px;">
-                        <div class="form-group">
-                            <label for="handleType">Форма</label>
-                            <select id="handleType" class="select">
-                                <option value="classic" selected>Classic</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="handleColor">Цвет</label>
-                            <select id="handleColor" class="select">
-                                <option value="" disabled selected hidden>Выберите</option>
-                                <option value="white">Белый (9016)</option>
-                                <option value="black">Чёрный (9005M)</option>
-                                <option value="raw">Неокрас. (C)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="handle-badges">
-                        <div class="handle-badge">Всегда KN100KR — 1 шт</div>
-                        <div class="handle-badge">+3 позиции по выбранному цвету</div>
+                    <div class="form-group">
+                        <label for="handleColor">Цвет</label>
+                        <select id="handleColor" class="select">
+                            <option value="" disabled selected hidden>Выберите</option>
+                            <option value="white">Белый (9016)</option>
+                            <option value="black">Чёрный (9005M)</option>
+                            <option value="raw">Неокрас. (C)</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="form-group full">
-                    <div class="footer-row">
-                        <div>
-                            <label for="quantity">Количество окон</label>
-                            <div class="helper-text">В одинаковых размерах и конфигурации</div>
-                        </div>
-                        <div class="qty-chip">
-                            <input type="number" id="quantity" class="input" style="width:70px;padding:4px 8px;font-size:13px;"
-                                   value="1" min="1" max="50">
-                        </div>
+                <div class="section-divider"></div>
+
+                <div class="section-title">Количество окон</div>
+                <div class="footer-row">
+                    <div class="form-group">
+                        <label for="quantity">Кол-во одинаковых окон</label>
+                        <input type="number" id="quantity" class="input qty-input-wrapper" value="1" min="1" max="50">
                     </div>
                 </div>
             </div>
@@ -456,7 +397,7 @@
 </div>
 
 <script>
-        const tg = window.Telegram ? window.Telegram.WebApp : null;
+    const tg = window.Telegram ? window.Telegram.WebApp : null;
 
     if (tg) {
         tg.ready();
@@ -560,11 +501,7 @@
         return true;
     }
 
-    // ===== Матрица: Видимая фурнитура + Поворотно-откидной, вес до 100 кг =====
-    // 3 диапазона высоты × 3 диапазона ширины = 9 комбинаций
-
     const hardwareMatrixVisibleTurnTilt = [
-        // Высота 550–1200, ширина 390–700
         {
             minHeight: 550, maxHeight: 1200,
             minWidth: 390, maxWidth: 700,
@@ -576,7 +513,6 @@
                 { article: 'KN100E1', name: 'Ножницы П/О', qty: 1 }
             ]
         },
-        // Высота 550–1200, ширина 701–1000
         {
             minHeight: 550, maxHeight: 1200,
             minWidth: 701, maxWidth: 1000,
@@ -588,7 +524,6 @@
                 { article: 'KN100E1', name: 'Ножницы П/О', qty: 1 }
             ]
         },
-        // Высота 550–1200, ширина 1001–1200
         {
             minHeight: 550, maxHeight: 1200,
             minWidth: 1001, maxWidth: 1200,
@@ -600,7 +535,6 @@
                 { article: 'KN100E1', name: 'Ножницы П/О', qty: 1 }
             ]
         },
-        // Высота 1201–1800, ширина 390–700
         {
             minHeight: 1201, maxHeight: 1800,
             minWidth: 390, maxWidth: 700,
@@ -612,7 +546,6 @@
                 { article: 'KN100E2', name: 'Ножницы П/О усиленные', qty: 1 }
             ]
         },
-        // Высота 1201–1800, ширина 701–1000
         {
             minHeight: 1201, maxHeight: 1800,
             minWidth: 701, maxWidth: 1000,
@@ -624,7 +557,6 @@
                 { article: 'KN100E2', name: 'Ножницы П/О усиленные', qty: 1 }
             ]
         },
-        // Высота 1201–1800, ширина 1001–1200
         {
             minHeight: 1201, maxHeight: 1800,
             minWidth: 1001, maxWidth: 1200,
@@ -636,7 +568,6 @@
                 { article: 'KN100E2', name: 'Ножницы П/О усиленные', qty: 1 }
             ]
         },
-        // Высота 1801–2400, ширина 390–700
         {
             minHeight: 1801, maxHeight: 2400,
             minWidth: 390, maxWidth: 700,
@@ -648,7 +579,6 @@
                 { article: 'KN100E3', name: 'Ножницы П/О для высоких створок', qty: 1 }
             ]
         },
-        // Высота 1801–2400, ширина 701–1000
         {
             minHeight: 1801, maxHeight: 2400,
             minWidth: 701, maxWidth: 1000,
@@ -660,7 +590,6 @@
                 { article: 'KN100E3', name: 'Ножницы П/О для высоких створок', qty: 1 }
             ]
         },
-        // Высота 1801–2400, ширина 1001–1200
         {
             minHeight: 1801, maxHeight: 2400,
             minWidth: 1001, maxWidth: 1200,
@@ -674,7 +603,6 @@
         }
     ];
 
-    // Ручка Classic: всегда KN100KR + 3 позиции по цвету
     const handleColorArticles = {
         white: [
             { article: 'KN100KR', name: 'Переходник под ручку Classic', qty: 1 },
@@ -716,7 +644,6 @@
             return null;
         }
 
-        // Пока реализована только Видимая + Поворотно-откидной до 100 кг
         if (openingType !== 'turn-tilt' || hardwareType !== 'visible') {
             showMessage('Пока реализован только вариант: Видимая + Поворотно-откидной.', 'error');
             return null;
@@ -724,7 +651,7 @@
 
         const baseSet = pickVisibleTurnTiltSet(h, w);
         if (!baseSet) {
-            showMessage('Под эти размеры пока нет настроенной зоны. Проверь диапазоны или обратись к менеджеру.', 'error');
+            showMessage('Под эти размеры нет настроенной зоны. Проверь диапазоны или обратись к менеджеру.', 'error');
             return null;
         }
 
@@ -734,9 +661,6 @@
 
         const colorArticles = handleColorArticles[handleColor] || handleColorArticles['white'];
         colorArticles.forEach(item => resultArticles.push({ ...item }));
-
-        // На будущее: если захотим прижим для скрытой — здесь можно будет добавить по clampSide.
-        // Сейчас прижим не используется для видимой фурнитуры.
 
         return {
             height: h,
@@ -782,7 +706,12 @@
         accumulatedCounter.style.display = '';
         accumulatedCountElement.textContent = String(accumulatedResults.length);
 
-        showMessage('Расчёт записан. Нажми «Итого», когда соберёшь все окна.', 'success');
+        // лёгкий визуальный фидбек: номер расчёта + мигание счётчика
+        const n = accumulatedResults.length;
+        showMessage(`Расчёт №${n} записан. Нажми «Итого», когда соберёшь все окна.`, 'success');
+        accumulatedCounter.classList.remove('flash');
+        void accumulatedCounter.offsetWidth;
+        accumulatedCounter.classList.add('flash');
     });
 
     totalBtn.addEventListener('click', () => {
