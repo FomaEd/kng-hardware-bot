@@ -472,18 +472,17 @@
             showMessage('Заполни высоту, ширину и вес створки.', 'error');
             return false;
         }
-        if (h < 550 || h > 2400) {
-            showMessage('Для этой таблицы высота должна быть в диапазоне 550–2400 мм.', 'error');
+        if (h < 500 || h > 2400) {
+            showMessage('Высота должна быть в диапазоне 500–2400 мм.', 'error');
             return false;
         }
-        if (w < 390 || w > 1300) { // у поворотной ширина до 1300
-            showMessage('Для этой таблицы ширина должна быть в диапазоне 390–1300 мм.', 'error');
+        if (w < 390 || w > 1600) {
+            showMessage('Ширина должна быть в диапазоне 390–1600 мм.', 'error');
             return false;
         }
 
-        // теперь разрешаем два типа открывания
-        if (openingType !== 'turn-tilt' && openingType !== 'turn') {
-            showMessage('Сейчас доступны типы открывания: Поворотно-откидной и Поворотный.', 'error');
+        if (openingType !== 'turn-tilt' && openingType !== 'turn' && openingType !== 'tilt') {
+            showMessage('Сейчас доступны: Поворотно-откидной, Поворотный и Откидной.', 'error');
             return false;
         }
 
@@ -709,6 +708,30 @@
         }
     ];
 
+    const hardwareMatrixVisibleTilt = [
+        {
+            minHeight: 500, maxHeight: 1300,
+            minWidth: 445, maxWidth: 1000,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 2 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 2 },
+                { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 2 },
+            ]
+        },
+        {
+            minHeight: 500, maxHeight: 1300,
+            minWidth: 1001, maxWidth: 1600,
+            articles: [
+                { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+                { article: 'KN400FS', name: 'Приподниматель створки', qty: 2 },
+                { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 3 },
+                { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 2 },
+                { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 1 },
+            ]
+        }
+    ];
+
     const handleColorArticles = {
         white: [
             { article: 'KN100KR', name: 'Переходник под ручку Classic', qty: 1 },
@@ -748,6 +771,43 @@
         ]
     };
 
+    const handleColorArticlesTiltVisible = {
+        zone1: { // 500–1300 x 445–1000
+            white: [
+                { article: 'KN100KR',      name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_9016', name: 'Ручка оконная Classic_9016',  qty: 1 },
+                { article: 'KN219CC_9016', name: 'Петля поворотная 3-хсекц.бел.', qty: 2 },
+            ],
+            black: [
+                { article: 'KN100KR',        name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_9005M',  name: 'Ручка оконная Classic черн. Matt', qty: 1 },
+                { article: 'KN219CC_9005M',  name: 'Петля поворотная 3-хсекц черн. matt', qty: 2 },
+            ],
+            raw: [
+                { article: 'KN100KR',    name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_C',  name: 'Ручка оконная Classic неокр.', qty: 1 },
+                { article: 'KN219CC_C',  name: 'Петля поворотная 3-хсекц неокр', qty: 2 },
+            ],
+        },
+        zone2: { // 500–1300 x 1001–1600
+            white: [
+                { article: 'KN100KR',      name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_9016', name: 'Ручка оконная Classic_9016',  qty: 1 },
+                { article: 'KN219CC_9016', name: 'Петля поворотная 3-хсекц.бел.', qty: 3 },
+            ],
+            black: [
+                { article: 'KN100KR',        name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_9005M',  name: 'Ручка оконная Classic черн. Matt', qty: 1 },
+                { article: 'KN219CC_9005M',  name: 'Петля поворотная 3-хсекц черн. matt', qty: 3 },
+            ],
+            raw: [
+                { article: 'KN100KR',    name: 'Переходник под ручку Classic', qty: 1 },
+                { article: 'KN218HN_C',  name: 'Ручка оконная Classic неокр.', qty: 1 },
+                { article: 'KN219CC_C',  name: 'Петля поворотная 3-хсекц неокр', qty: 3 },
+            ],
+        },
+    };
+
     function pickVisibleTurnTiltSet(height, width) {
         return hardwareMatrixVisibleTurnTilt.find(row =>
             height >= row.minHeight && height <= row.maxHeight &&
@@ -759,16 +819,15 @@
         const h = Number(heightInput.value);
         const w = Number(widthInput.value);
         const wt = Number(weightInput.value);
-        const openingType = openingTypeSelect.value; // 'turn-tilt' или 'turn'
-        const hardwareType = hardwareTypeInput.value; // 'visible'
+        const openingType = openingTypeSelect.value; // 'turn-tilt' | 'turn' | 'tilt'
+        const hardwareType = hardwareTypeInput.value;
         const clampSide = clampSideInput.value;
-        const handleColor = handleColorSelect.value || 'white'; // 'white' | 'black' | 'raw'
+        const handleColor = handleColorSelect.value || 'white';
 
         if (!validateInputs()) {
             return null;
         }
 
-        // пока работаем только с видимой фурнитурой
         if (hardwareType !== 'visible') {
             showMessage('Пока реализованы только варианты с видимой фурнитурой.', 'error');
             return null;
@@ -777,7 +836,7 @@
         const resultArticles = [];
 
         if (openingType === 'turn-tilt') {
-            // Видимая + Поворотно-откидной (твоя старая логика)
+            // Видимая + Поворотно-откидной
             const baseSet = pickVisibleTurnTiltSet(h, w);
             if (!baseSet) {
                 showMessage('Под эти размеры нет настроенной зоны (П/О). Проверь диапазоны или обратись к менеджеру.', 'error');
@@ -790,7 +849,7 @@
             colorArticles.forEach(item => resultArticles.push({ ...item }));
 
         } else if (openingType === 'turn') {
-            // Видимая + Поворотный (новая логика)
+            // Видимая + Поворотный
             const baseSet = hardwareMatrixVisibleTurn.find(row =>
                 h >= row.minHeight && h <= row.maxHeight &&
                 w >= row.minWidth && w <= row.maxWidth
@@ -805,6 +864,33 @@
 
             const colorArticles = handleColorArticlesTurnVisible[handleColor] || handleColorArticlesTurnVisible['white'];
             colorArticles.forEach(item => resultArticles.push({ ...item }));
+
+        } else if (openingType === 'tilt') {
+            // Видимая + Откидной
+            const baseSet = hardwareMatrixVisibleTilt.find(row =>
+                h >= row.minHeight && h <= row.maxHeight &&
+                w >= row.minWidth && w <= row.maxWidth
+            );
+
+            if (!baseSet) {
+                showMessage('Под эти размеры нет настроенной зоны (Откидной). Проверь диапазоны или обратись к менеджеру.', 'error');
+                return null;
+            }
+
+            baseSet.articles.forEach(item => resultArticles.push({ ...item }));
+
+            // Определяем зону по ширине
+            const zoneKey = (w >= 445 && w <= 1000) ? 'zone1' : 'zone2';
+
+            const tiltHandleByZone = handleColorArticlesTiltVisible[zoneKey];
+            const colorArticles =
+                (tiltHandleByZone && tiltHandleByZone[handleColor]) ||
+                (tiltHandleByZone && tiltHandleByZone['white']);
+
+            if (colorArticles) {
+                colorArticles.forEach(item => resultArticles.push({ ...item }));
+            }
+        }
 
         } else {
             showMessage('Для этого типа открывания подбор ещё не реализован.', 'error');
@@ -877,8 +963,15 @@
         const texts = [];
 
         accumulatedResults.forEach((res, index) => {
+            let openingTypeText = 'Поворотно-откидная';
+            if (res.openingType === 'turn') {
+                openingTypeText = 'Поворотная';
+            } else if (res.openingType === 'tilt') {
+                openingTypeText = 'Откидная';
+            }
+
             const header = `Окно ${index + 1}: ${res.width}×${res.height} мм, ${res.weight} кг, ` +
-                `Видимая, Поворотно-откидная, цвет ручки: ${res.handleColor}, кол-во: ${res.quantityWindows} шт.`;
+                `Видимая, ${openingTypeText}, цвет ручки: ${res.handleColor}, кол-во: ${res.quantityWindows} шт.`;
             texts.push(header);
 
             const grouped = groupArticles(res.items, res.quantityWindows);
