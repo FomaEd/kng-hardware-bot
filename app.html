@@ -761,10 +761,16 @@
         const finalText = texts.join('\n');
 
         if (tg) {
+            // готовим массив для Excel — то, что ждёт бэкенд
+            const excelData = finalGrouped.map(item => ({
+                article: item.article,
+                name: item.name,
+                qty: item.qty
+            }));
+
             tg.sendData(JSON.stringify({
-                type: 'hardware_result',
-                text: finalText,
-                windows: accumulatedResults
+                action: 'total',
+                data: excelData
             }));
             tg.close();
         } else {
