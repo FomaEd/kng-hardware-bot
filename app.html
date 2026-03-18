@@ -461,7 +461,7 @@
         messageBox.className = 'message-box ' + type;
     }
 
-    function validateInputs() {
+        function validateInputs() {
         const h = Number(heightInput.value);
         const w = Number(widthInput.value);
         const wt = Number(weightInput.value);
@@ -476,20 +476,23 @@
             showMessage('Для этой таблицы высота должна быть в диапазоне 550–2400 мм.', 'error');
             return false;
         }
-        if (w < 390 || w > 1200) {
-            showMessage('Для этой таблицы ширина должна быть в диапазоне 390–1200 мм.', 'error');
+        if (w < 390 || w > 1300) { // у поворотной ширина до 1300
+            showMessage('Для этой таблицы ширина должна быть в диапазоне 390–1300 мм.', 'error');
             return false;
         }
-        if (openingType !== 'turn-tilt') {
-            showMessage('Сейчас реализован только тип открывания: Поворотно-откидной.', 'error');
+
+        // теперь разрешаем два типа открывания
+        if (openingType !== 'turn-tilt' && openingType !== 'turn') {
+            showMessage('Сейчас доступны типы открывания: Поворотно-откидной и Поворотный.', 'error');
             return false;
         }
+
         if (hardwareType !== 'visible') {
             showMessage('Эта таблица работает только для Видимой фурнитуры.', 'error');
             return false;
         }
         if (wt > 100) {
-            showMessage('Превышен допустимый вес для видимой П/О (максимум 100 кг).', 'error');
+            showMessage('Превышен допустимый вес для видимой фурнитуры (максимум 100 кг).', 'error');
             return false;
         }
         if (!handleColorSelect.value) {
