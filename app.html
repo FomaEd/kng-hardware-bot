@@ -319,6 +319,9 @@
                         <div class="toggle-chip active" data-value="visible">
                             <span>Видимая</span>
                         </div>
+                        <div class="toggle-chip" data-value="visibleProvedal">
+                            <span>Видимая Provedal</span>
+                        </div>
                         <div class="toggle-chip" data-value="hidden90">
                             <span>Скрытая 90°</span>
                         </div>
@@ -846,10 +849,15 @@
             return null;
         }
 
-        if (hardwareType !== 'visible') {
-            showMessage('Пока реализованы только варианты с видимой фурнитурой.', 'error');
-            return null;
-        }
+        if (hardwareType === 'visible') {
+    // работаем по текущим матрицам (turn-tilt / turn / tilt) — тут всё уже есть
+} else if (hardwareType === 'visibleProvedal') {
+    showMessage('Видимая Provedal пока в разработке. Скоро добавим матрицу.', 'error');
+    return null;
+} else {
+    showMessage('Этот тип фурнитуры ещё не реализован.', 'error');
+    return null;
+}
 
         const resultArticles = [];
 
