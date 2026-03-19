@@ -462,46 +462,64 @@
     }
 
         function validateInputs() {
-        const h = Number(heightInput.value);
-        const w = Number(widthInput.value);
-        const wt = Number(weightInput.value);
-        const openingType = openingTypeSelect.value;
-        const hardwareType = hardwareTypeInput.value;
+    const h = Number(heightInput.value);
+    const w = Number(widthInput.value);
+    const wt = Number(weightInput.value);
+    const openingType = openingTypeSelect.value;
+    const hardwareType = hardwareTypeInput.value;
 
-        if (!h || !w || !wt) {
-            showMessage('Заполни высоту, ширину и вес створки.', 'error');
-            return false;
-        }
-        if (h < 500 || h > 2400) {
-            showMessage('Высота должна быть в диапазоне 500–2400 мм.', 'error');
-            return false;
-        }
-        if (w < 390 || w > 1600) {
-            showMessage('Ширина должна быть в диапазоне 390–1600 мм.', 'error');
-            return false;
-        }
-
-        if (openingType !== 'turn-tilt' && openingType !== 'turn' && openingType !== 'tilt') {
-            showMessage('Сейчас доступны: Поворотно-откидной, Поворотный и Откидной.', 'error');
-            return false;
-        }
-
-        if (hardwareType !== 'visible') {
-            showMessage('Эта таблица работает только для Видимой фурнитуры.', 'error');
-            return false;
-        }
-        if (wt > 100) {
-            showMessage('Превышен допустимый вес для видимой фурнитуры (максимум 100 кг).', 'error');
-            return false;
-        }
-        if (!handleColorSelect.value) {
-            showMessage('Выбери цвет ручки.', 'error');
-            return false;
-        }
-
-        showMessage('', 'success');
-        return true;
+    if (!h || !w || !wt) {
+        showMessage('Заполни высоту, ширину и вес створки.', 'error');
+        return false;
     }
+    if (h < 500 || h > 2400) {
+        showMessage('Высота должна быть в диапазоне 500–2400 мм.', 'error');
+        return false;
+    }
+    if (w < 390 || w > 1600) {
+        showMessage('Ширина должна быть в диапазоне 390–1600 мм.', 'error');
+        return false;
+    }
+
+    if (openingType !== 'turn-tilt' && openingType !== 'turn' && openingType !== 'tilt') {
+        showMessage('Сейчас доступны: Поворотно-откидной, Поворотный и Откидной.', 'error');
+        return false;
+    }
+
+    if (
+        hardwareType !== 'visible' &&
+        hardwareType !== 'visibleProvedal' &&
+        hardwareType !== 'hidden90' &&
+        hardwareType !== 'hidden180'
+    ) {
+        showMessage('Неизвестный тип фурнитуры.', 'error');
+        return false;
+    }
+
+    // Ограничения по весу для Видимой
+    if (hardwareType === 'visible') {
+        if (openingType === 'turn' && wt > 60) {
+            showMessage('Максимально допустимый вес для Видимая + Поворотный — 60 кг.', 'error');
+            return false;
+        }
+        if (openingType === 'tilt' && wt > 50) {
+            showMessage('Максимально допустимый вес для Видимая + Откидной — 50 кг.', 'error');
+            return false;
+        }
+        if (openingType === 'turn-tilt' && wt > 100) {
+            showMessage('Превышен допустимый вес для Видимая + Поворотно-откидной (максимум 100 кг).', 'error');
+            return false;
+        }
+    }
+
+    if (!handleColorSelect.value) {
+        showMessage('Выбери цвет ручки.', 'error');
+        return false;
+    }
+
+    showMessage('', 'success');
+    return true;
+}
 
     const hardwareMatrixVisibleTurnTilt = [
         {
@@ -942,7 +960,7 @@
         accumulatedCountElement.textContent = String(accumulatedResults.length);
 
         const n = accumulatedResults.length;
-        showMessage(`Расчёт №${n} записан. Нажми «Итого», когда соберёшь все окна.`, 'success');
+        showMessage(`Расчёт №${n} записан. Нажмите «Итого», когда соберёте все окна.`, 'success');
         accumulatedCounter.classList.remove('flash');
         void accumulatedCounter.offsetWidth;
         accumulatedCounter.classList.add('flash');
@@ -954,7 +972,7 @@
 
     totalBtn.addEventListener('click', () => {
         if (accumulatedResults.length === 0) {
-            showMessage('Нет записанных расчётов. Сначала нажми «Записать».', 'error');
+            showMessage('Нет записанных расчётов. Сначала нажмите «Записать».', 'error');
             return;
         }
 
