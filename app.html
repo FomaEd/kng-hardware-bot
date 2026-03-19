@@ -931,16 +931,6 @@
             return null;
         }
 
-        if (hardwareType === 'visible') {
-    // работаем по текущим матрицам (turn-tilt / turn / tilt) — тут всё уже есть
-} else if (hardwareType === 'visibleProvedal') {
-    showMessage('Видимая Provedal пока в разработке. Скоро добавим матрицу.', 'error');
-    return null;
-} else {
-    showMessage('Этот тип фурнитуры ещё не реализован.', 'error');
-    return null;
-}
-
         const resultArticles = [];
 
                 if (openingType === 'turn-tilt') {
