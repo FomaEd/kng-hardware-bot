@@ -464,7 +464,7 @@
         messageBox.className = 'message-box ' + type;
     }
 
-       function validateInputs() {
+    function validateInputs() {
     const h = Number(heightInput.value);
     const w = Number(widthInput.value);
     const wt = Number(weightInput.value);
@@ -501,9 +501,7 @@
         return false;
     }
 
-    // Общие проверки по весу по типам фурнитуры / открывания
-
-    // Видимая + П/О, Поворотный, Откидной
+    // Видимая
     if (hardwareType === 'visible') {
         if (openingType === 'turn-tilt' && wt > 100) {
             showMessage('Максимальный вес для Видимая П/О — 100 кг.', 'error');
@@ -535,7 +533,7 @@
         }
     }
 
-    // Скрытая 90 — общий лимит до 150 кг (детализация уже в calculateHardware)
+    // Скрытая 90
     if (hardwareType === 'hidden90') {
         if (wt > 150) {
             showMessage('Максимальный вес для скрытой фурнитуры 90° — 150 кг.', 'error');
@@ -543,7 +541,7 @@
         }
     }
 
-    // Для скрытой 180 пока базовый лимит, потом уточним
+    // Скрытая 180
     if (hardwareType === 'hidden180') {
         if (wt > 150) {
             showMessage('Максимальный вес для скрытой фурнитуры 180° — 150 кг.', 'error');
