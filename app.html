@@ -2181,13 +2181,23 @@ function showMessage(text, type = 'error') {
                 colorArticles.forEach(item => resultArticles.push({ ...item }));
             }
 
-                    } else if (hardwareType === 'hidden90') {
+        } else if (hardwareType === 'hidden90') {
             if (wt > 80) {
                 showMessage('Максимальный вес для Скрытая 90 Откидной — 80 кг.', 'error');
                 return null;
             }
 
+            if (clampSide !== 'any') {
+                showMessage(
+                    'Для ваших параметров сторона прижима не имеет значения. ' +
+                    'Выберите вариант «Не имеет значения».',
+                    'error'
+                );
+                return null;
+            }
+
             const baseSet = hardwareMatrixHidden90Tilt.find(row =>
+
                 h >= row.minHeight && h <= row.maxHeight &&
                 w >= row.minWidth && w <= row.maxWidth
             );
