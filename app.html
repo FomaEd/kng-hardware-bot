@@ -3369,45 +3369,40 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
         } else if (openingType === 'turn') {
 
         if (hardwareType === 'hidden180') {
-            // Скрытая 180 + Поворотная
+        // Скрытая 180 + Поворотная
 
-            if (wt > 210) {
-                showMessage('Максимальный вес для Скрытая 180 — 210 кг.', 'error');
-                return null;
-            }
+        if (wt > 130) {
+            showMessage('Максимальный вес для Скрытая 180 Поворотная — 130 кг.', 'error');
+            return null;
+        }
 
-            if (clampSide !== 'left' && clampSide !== 'right') {
-                showMessage(
-                    'Для этого типа фурнитуры необходимо выбрать сторону прижима: Левый или Правый.',
-                    'error'
-                );
-                return null;
-            }
-
-            let matrix;
-            if (wt <= 130) {
-                matrix = hardwareMatrixHidden180Turn_0_130;
-            } else if (wt <= 160) {
-                matrix = hardwareMatrixHidden180Turn_130_160;
-            } else {
-                matrix = hardwareMatrixHidden180Turn_160_210;
-            }
-
-            const baseSet = matrix.find(row =>
-                h >= row.minHeight && h <= row.maxHeight &&
-                w >= row.minWidth && w <= row.maxWidth
+        if (clampSide !== 'left' && clampSide !== 'right') {
+            showMessage(
+                'Для этого типа фурнитуры необходимо выбрать сторону прижима: Левый или Правый.',
+                'error'
             );
+            return null;
+        }
 
-            if (!baseSet) {
-                showMessage(
-                    'Под эти размеры нет зоны для Скрытая 180 Поворотная. Проверь диапазоны или обратись к менеджеру.',
-                    'error'
-                );
-                return null;
-            }
+        let matrix;
+        // Поворотная допускается только до 130 кг
+        matrix = hardwareMatrixHidden180Turn_0_130;
 
-            const clampKey = clampSide === 'right' ? 'articlesRight' : 'articlesLeft';
-            baseSet[clampKey].forEach(item => resultArticles.push({ ...item }));
+        const baseSet = matrix.find(row =>
+            h >= row.minHeight && h <= row.maxHeight &&
+            w >= row.minWidth && w <= row.maxWidth
+        );
+
+        if (!baseSet) {
+            showMessage(
+                'Под эти размеры нет зоны для Скрытая 180 Поворотная. Проверь диапазоны или обратись к менеджеру.',
+                'error'
+            );
+            return null;
+        }
+
+        const clampKey = clampSide === 'right' ? 'articlesRight' : 'articlesLeft';
+        baseSet[clampKey].forEach(item => resultArticles.push({ ...item }));
 
             // Ручки — как у Скрытая 90 Поворотная
             const handleSet =
