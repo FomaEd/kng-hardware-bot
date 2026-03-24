@@ -2961,8 +2961,9 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
     }
 
     saveBtn.addEventListener('click', () => {
-        const hardwareResult = ();
-        if (!hardwareResult) return;
+    const hardwareResult = calculateHardware();
+    if (!hardwareResult) return;
+    // дальше как у тебя
 
         const qtyWindows = Number(quantityInput.value) || 1;
 
