@@ -373,7 +373,7 @@
                             <span>Скрытая 90°</span>
                         </div>
                         <div class="toggle-chip" data-value="hidden180">
-                            <span>Скрытая 180°</span>
+                            <span>Скрытая 180° (Tilt First)</span>
                         </div>
                     </div>
                     <input type="hidden" id="hardwareType" value="visible">
@@ -2671,7 +2671,7 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
             } else if (hardwareType === 'hidden180') {
     // Проверка диапазона веса для скрытой 180 П/О
     if (wt > 160) {
-        showMessage('Максимальный вес для Скрытая 180° П/О — 160 кг.', 'error');
+        showMessage('Максимальный вес для Скрытая 180° (Tilt First) П/О — 160 кг.', 'error');
         return null;
     }
 
@@ -2700,7 +2700,7 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
 
     if (!baseSet) {
         showMessage(
-            'Под эти размеры нет зоны для Скрытая 180 П/О. Проверь диапазоны или обратись к менеджеру.',
+            'Под эти размеры нет зоны для Скрытая 180 (Tilt First) П/О. Проверь диапазоны или обратись к менеджеру.',
             'error'
         );
         return null;
@@ -3141,11 +3141,11 @@ totalBtn.addEventListener('click', () => {
 
         if (isTurnTilt) {
             angleWarningText =
-                'Внимание! При весе створки от 131 кг до 210 кг ' +
+                'Внимание! В поворотно-откидном или откидно-поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
                 'установка Ограничителя открывания створки обязательна!';
         } else if (isTurn) {
             angleWarningText =
-                'Внимание! При весе створки от 131 кг до 210 кг ' +
+                'Внимание! В поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
                 'установка Ограничителя открывания створки обязательна!';
         }
 
