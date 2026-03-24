@@ -3106,10 +3106,11 @@ totalBtn.addEventListener('click', () => {
     // Проверяем, есть ли среди окон сочетание:
     // Поворотно-откидной + Скрытая 180 + вес 131–160 кг (по факту)
     const needAngleWarning = accumulatedResults.some(res =>
-        res.openingType === 'turn-tilt' &&
-        res.hardwareType === 'hidden180' &&
-        res.weight >= 131 && res.weight <= 160
-    );
+    res.openingType === 'turn-tilt' &&
+    res.hardwareType === 'hidden180' &&
+    Number(res.weight) >= 131 &&
+    Number(res.weight) <= 160
+);
 
     if (needAngleWarning && angleWarningOverlay && angleWarningOkBtn) {
         angleWarningOverlay.style.display = 'flex';
