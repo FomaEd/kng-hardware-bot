@@ -3105,24 +3105,50 @@ totalBtn.addEventListener('click', () => {
 
     // Проверяем, есть ли среди окон сочетание:
     // Поворотно-откидной + Скрытая 180 + вес 131–160 кг (по факту)
-    const needAngleWarning = accumulatedResults.some(res =>
-    res.openingType === 'turn-tilt' &&
-    res.hardwareType === 'hidden180' &&
-    Number(res.weight) >= 131 &&
-    Number(res.weight) <= 160
-);
+    // Проверяем, есть ли среди окон сочетания для предупреждения
+    let needAngleWarning = false;
+    let angleWarningText = '';
 
-    if (needAngleWarning && angleWarningOverlay && angleWarningOkBtn) {
-        angleWarningOverlay.style.display = 'flex';
+    for (const res of accumulatedResults) {
+    const oType = String(res.openingType);
+    const hType = String(res.hardwareType);
+    const wgt = Number(res.weight);
 
-        angleWarningOkBtn.onclick = null;
-        angleWarningOkBtn.onclick = () => {
-            angleWarningOverlay.style.display = 'none';
-            sendAndClose();
-        };
-    } else {
-        sendAndClose();
+    const isHidden180 = hType === 'hidden180';
+    const inWeightRange = wgt >= 131 && wgt <= 210;
+    const isTurnTilt = oType === 'turn-tilt';
+    const isTurn = oType === 'turn';
+
+    if (isHidden180 && inWeightRange && (isTurnTilt || isTurn)) {
+        needAngleWarning = true;
+
+        if (isTurnTilt) {
+            angleWarningText =
+                'Внимание! При типе фурнитуры "Скрытая 180", типе открывания ' +
+                '"Поворотно-откидной" и весе створки от 131 кг до 210 кг, угол открывания = 90 градусов!';
+        } else if (isTurn) {
+            angleWarningText =
+                'Внимание! При типе фурнитуры "Скрытая 180", типе открывания ' +
+                '"Поворотный" и весе створки от 131 кг до 210 кг, угол открывания = 90 градусов!';
+        }
+
+        break; // достаточно первого подходящего окна
     }
+}
+
+if (needAngleWarning && angleWarningOverlay && angleWarningOkBtn) {
+    angleWarningOverlay.querySelector('.modal-text').textContent = angleWarningText;
+
+    angleWarningOverlay.style.display = 'flex';
+
+    angleWarningOkBtn.onclick = null;
+    angleWarningOkBtn.onclick = () => {
+        angleWarningOverlay.style.display = 'none';
+        sendAndClose();
+    };
+} else {
+    sendAndClose();
+}
 });
 </script>
 </body>
