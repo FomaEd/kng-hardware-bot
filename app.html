@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Подбор фурнитуры KNG</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
             --color-primary: #208080;
@@ -4403,6 +4404,21 @@ function groupArticles(items, multiplier) {
     return Array.from(map.values()).sort((a, b) => a.article.localeCompare(b.article));
 }
 
+    function exportToExcel(excelData) {
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    ws['!cols'] = [
+        { wch: 15 },  // артикул
+        { wch: 50 },  // наименование
+        { wch: 10 },  // кол-во
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Фурнитура');
+
+    const date = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(wb, `KNG_furnitura_${date}.xlsx`);
+}
+
 saveBtn.addEventListener('click', () => {
     const hardwareResult = calculateHardware();
     if (!hardwareResult) return;
@@ -4524,25 +4540,24 @@ totalBtn.addEventListener('click', () => {
 
     const tg = window.Telegram && window.Telegram.WebApp;
 
-    const excelData = finalGrouped.map(item => ({
-        article: item.article,
-        name: item.name,
-        qty: item.qty
+const excelData = finalGrouped.map(item => ({
+    article: item.article,
+    name: item.name,
+    qty: item.qty
+}));
+
+if (tg) {
+    // как раньше — бот не трогаем
+    tg.sendData(JSON.stringify({
+        action: 'total',
+        data: excelData
     }));
-
-    const sendAndClose = () => {
-        if (tg) {
-            tg.sendData(JSON.stringify({
-                action: 'total',
-                data: excelData
-            }));
-            tg.close();
-        } else {
-            showMessage('Результат (без Telegram):\n\n' + finalText, 'success');
-        }
-    };
-
-    sendAndClose();
+    tg.close();
+} else {
+    // обычная ссылка — скачиваем Excel
+    exportToExcel(excelData);
+    showMessage('Excel файл сформирован и скачан.', 'success');
+}
 });
 </script>
 </body>
