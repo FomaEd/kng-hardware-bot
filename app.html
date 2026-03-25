@@ -4228,7 +4228,6 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
 
         baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-        // Определяем зону по ширине
         const zoneKey = (w >= 445 && w <= 1000) ? 'zone1' : 'zone2';
 
         const tiltHandleByZone = handleColorArticlesTiltVisible[zoneKey];
@@ -4255,7 +4254,6 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
             return null;
         }
 
-        // Проверяем вес под конкретный диапазон
         if (typeof baseSet.maxWeight === 'number' && wt > baseSet.maxWeight) {
             showMessage(baseSet.weightErrorMessage, 'error');
             return null;
@@ -4267,8 +4265,6 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
 
         baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-        // Зона по ширине строго как в матрице:
-        // zone1: 500–1300, zone2: 1301–2000
         const zoneKey = (w >= 500 && w <= 1300) ? 'zone1' : 'zone2';
 
         const tiltHandleByZone = handleColorArticlesProvedalTilt[zoneKey];
@@ -4312,7 +4308,6 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
 
         baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-        // Ручки — как у Скрытая 180 Поворотная (та же матрица, что и для hidden90 turn)
         const handleSet =
             handleColorArticlesHidden90Turn[handleColor] ||
             handleColorArticlesHidden90Turn['white'];
@@ -4320,53 +4315,52 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
         if (handleSet) {
             handleSet.forEach(item => resultArticles.push({ ...item }));
         }
-    }
 
-        } else if (hardwareType === 'hidden90') {
-            if (wt > 80) {
-                showMessage('Максимальный вес для Скрытая 90 Откидной — 80 кг.', 'error');
-                return null;
-            }
+    } else if (hardwareType === 'hidden90') {
+        // Скрытая 90 + Откидной
+        if (wt > 80) {
+            showMessage('Максимальный вес для Скрытая 90 Откидной — 80 кг.', 'error');
+            return null;
+        }
 
-            if (clampSide !== 'any') {
-                showMessage(
-                    'Для ваших параметров сторона прижима не имеет значения. ' +
-                    'Выберите вариант «Не имеет значения».',
-                    'error'
-                );
-                return null;
-            }
-
-            const baseSet = hardwareMatrixHidden90Tilt.find(row =>
-
-                h >= row.minHeight && h <= row.maxHeight &&
-                w >= row.minWidth && w <= row.maxWidth
-            );
-
-            if (!baseSet) {
-                showMessage(
-                    'Под эти размеры нет зоны для Скрытая 90 Откидная. Проверь диапазоны или обратись к менеджеру.',
-                    'error'
-                );
-                return null;
-            }
-
-            baseSet.articles.forEach(item => resultArticles.push({ ...item }));
-
-            const handleSet =
-                handleColorArticlesHidden90Tilt[handleColor] ||
-                handleColorArticlesHidden90Tilt['white'];
-            handleSet.forEach(item => resultArticles.push({ ...item }));
-
-        } else {
+        if (clampSide !== 'any') {
             showMessage(
-                'Для этого типа фурнитуры с Откидным ещё нет подбора.',
+                'Для ваших параметров сторона прижима не имеет значения. ' +
+                'Выберите вариант «Не имеет значения».',
                 'error'
             );
             return null;
         }
 
+        const baseSet = hardwareMatrixHidden90Tilt.find(row =>
+            h >= row.minHeight && h <= row.maxHeight &&
+            w >= row.minWidth && w <= row.maxWidth
+        );
+
+        if (!baseSet) {
+            showMessage(
+                'Под эти размеры нет зоны для Скрытая 90 Откидная. Проверь диапазоны или обратись к менеджеру.',
+                'error'
+            );
+            return null;
+        }
+
+        baseSet.articles.forEach(item => resultArticles.push({ ...item }));
+
+        const handleSet =
+            handleColorArticlesHidden90Tilt[handleColor] ||
+            handleColorArticlesHidden90Tilt['white'];
+        handleSet.forEach(item => resultArticles.push({ ...item }));
+
     } else {
+        showMessage(
+            'Для этого типа фурнитуры с Откидным ещё нет подбора.',
+            'error'
+        );
+        return null;
+    }
+
+} else {
     showMessage(
         'Для этого типа открывания подбор ещё не реализован.',
         'error'
