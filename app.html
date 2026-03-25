@@ -615,11 +615,18 @@ function showMessage(text, type = 'error') {
 
     // Скрытая 180
     if (hardwareType === 'hidden180') {
-        if (wt > 210) {
-            showMessage('Максимальный вес для скрытой фурнитуры 180° — 210 кг.', 'error');
-            return false;
-        }
+    // Общий максимум для любой конфигурации
+    if (wt > 210) {
+        showMessage('Максимальный вес для скрытой фурнитуры 180° — 210 кг.', 'error');
+        return false;
     }
+
+    // Если уже выбран тип открывания "Откидной" — режем по 130 кг
+    if (openingType === 'tilt' && wt > 130) {
+        showMessage('Максимальный вес для Скрытая 180 Откидная — 130 кг.', 'error');
+        return false;
+    }
+}
 
     return true;
 }
