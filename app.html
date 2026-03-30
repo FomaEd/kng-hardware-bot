@@ -537,6 +537,7 @@
 
             clampSideGroup.style.display = 'none';
             clampSideInput.value = 'any';
+            if (profileTypeGroup) profileTypeGroup.style.display = 'none'; // ← добавить
 
     } else if (openingType === 'vent-sash') {
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
@@ -545,6 +546,7 @@
 
         clampSideGroup.style.display = 'none';
         clampSideInput.value = 'any';
+        if (profileTypeGroup) profileTypeGroup.style.display = 'none'; // ← добавить
 
     } else {
         // Обычные режимы (П/О, Поворотный, Откидной, Штульповый)
