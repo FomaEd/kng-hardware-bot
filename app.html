@@ -558,7 +558,11 @@
 // --- Тоггл типа фурнитуры ---
 if (hardwareTypeToggle && hardwareTypeInput && clampSideGroup) {
     hardwareTypeToggle.addEventListener('click', (e) => {
+        console.log('CLICK hardwareTypeToggle, target =', e.target);
+        
         const chip = e.target.closest('.toggle-chip');
+        console.log('closest chip =', chip);
+        
         if (!chip) return;
 
         [...hardwareTypeToggle.querySelectorAll('.toggle-chip')]
@@ -3976,6 +3980,14 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
             { article: 'KN218HN_C', name: 'Ручка оконная Classic неокр.', qty: 1 },
         ],
     };
+
+    console.log('INIT', {
+  hardwareTypeGroup,
+  hardwareTypeToggle,
+  hardwareTypeInput,
+  clampSideGroup,
+  clampSideToggle
+});
 
     function pickVisibleTurnTiltSet(height, width) {
         return hardwareMatrixVisibleTurnTilt.find(row =>
