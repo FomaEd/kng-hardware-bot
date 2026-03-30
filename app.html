@@ -363,6 +363,7 @@
                         <option value="tilt">Откидной</option>
                         <option value="stulp">Штульповый</option>
                         <option value="top-hung">Верхнеподвесной</option>
+                        <option value="vent-sash">Вент. створка</option>
                     </select>
                 </div>
 
@@ -384,6 +385,12 @@
                     </div>
                     <input type="hidden" id="hardwareType" value="visible">
                 </div>
+                <div class="form-group" id="ventNoteGroup" style="display:none;">
+    <label>Тип фурнитуры</label>
+    <div class="message-box" style="margin-top:4px;">
+        Вентиляционная створка имеет скрытую фурнитуру. Максимальный угол открывания = 90°.
+    </div>
+</div>
 
 
                 <div class="form-group" id="clampSideGroup" style="display:none;">
@@ -483,6 +490,7 @@
     const hardwareTypeInput = document.getElementById('hardwareType');
     const clampSideInput = document.getElementById('clampSide');
     const clampSideGroup = document.getElementById('clampSideGroup');
+    const ventNoteGroup = document.getElementById('ventNoteGroup');
 
     const heightInput = document.getElementById('height');
     const widthInput = document.getElementById('width');
@@ -502,19 +510,29 @@
     const accumulatedResults = [];
 
     openingTypeSelect.addEventListener('change', () => {
-    const openingType = openingTypeSelect.value;
+        const openingType = openingTypeSelect.value;
 
     if (openingType === 'top-hung') {
-        // Прячем выбор типа фурнитуры
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
+        if (ventNoteGroup) ventNoteGroup.style.display = 'none';
         hardwareTypeInput.value = 'visible';
 
-        // Прячем прижим и сбрасываем
         clampSideGroup.style.display = 'none';
         clampSideInput.value = 'any';
+
+    } else if (openingType === 'vent-sash') {
+        // Прячем кнопки типов фурнитуры, показываем текст
+        if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
+        if (ventNoteGroup) ventNoteGroup.style.display = '';
+        hardwareTypeInput.value = 'hidden90'; // скрытая логика, чтоб ручки брались как надо
+
+        clampSideGroup.style.display = 'none';
+        clampSideInput.value = 'any';
+
     } else {
-        // Показываем обратно
+        // Обычные режимы
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = '';
+        if (ventNoteGroup) ventNoteGroup.style.display = 'none';
 
         const val = hardwareTypeInput.value;
         if (val === 'hidden90' || val === 'hidden180') {
@@ -592,10 +610,11 @@ function showMessage(text, type = 'error') {
         openingType !== 'turn' &&
         openingType !== 'tilt' &&
         openingType !== 'stulp' &&
-        openingType !== 'top-hung'
+        openingType !== 'top-hung' &&
+        openingType !== 'vent-sash'
     ) {
         showMessage(
-            'Сейчас доступны: П/О, Поворотный, Откидной, Штульповый и Верхнеподвесной.',
+            'Сейчас доступны: П/О, Поворотный, Откидной, Штульповый, Верхнеподвесной и Вент. створка.',
             'error'
         );
         return false;
@@ -3660,6 +3679,51 @@ const hardwareMatrixHidden180TurnTilt_130_160 = [
         ],
     },
 ];
+
+    const hardwareMatrixVentSash = [
+    {
+        minHeight: 550, maxHeight: 1200,
+        minWidth: 170, maxWidth: 300,
+        articles: [
+            { article: 'KN219EE', name: 'Компл. Петля Пов скрытая верх/низ 95º', qty: 1 },
+            { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+            { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 2 },
+        ],
+    },
+    {
+        minHeight: 1201, maxHeight: 1800,
+        minWidth: 170, maxWidth: 300,
+        articles: [
+            { article: 'KN219EE', name: 'Компл. Петля Пов скрытая верх/низ 95º', qty: 1 },
+            { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+            { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 3 },
+            { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 1 },
+            { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 1 },
+        ],
+    },
+    {
+        minHeight: 1801, maxHeight: 2400,
+        minWidth: 170, maxWidth: 300,
+        articles: [
+            { article: 'KN219EE', name: 'Компл. Петля Пов скрытая верх/низ 95º', qty: 1 },
+            { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+            { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 4 },
+            { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 2 },
+            { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
+        ],
+    },
+    {
+        minHeight: 2401, maxHeight: 3000,
+        minWidth: 170, maxWidth: 300,
+        articles: [
+            { article: 'KN219EE', name: 'Компл. Петля Пов скрытая верх/низ 95º', qty: 1 },
+            { article: 'KN100LE', name: 'Цапфа концевая', qty: 2 },
+            { article: 'KN100TD', name: 'Ответная планка для цапфы', qty: 5 },
+            { article: 'KN100OU', name: 'Цапфа под тягу стандарт', qty: 3 },
+            { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
+        ],
+    },
+];
     
              const handleColorArticlesHidden180TurnTilt = {
     white: [
@@ -3927,6 +3991,33 @@ if (openingType === 'top-hung') {
     if (!baseSet) {
         showMessage(
             'Под эти размеры нет зоны для Верхнеподвесной створки. Проверь диапазоны или обратись к менеджеру.',
+            'error'
+        );
+        return null;
+    }
+
+    baseSet.articles.forEach(item => resultArticles.push({ ...item }));
+
+    // Ручка Classic — как у Поворотная + Скрытая 90
+    const handleSet =
+        handleColorArticlesHidden90Turn[handleColor] ||
+        handleColorArticlesHidden90Turn['white'];
+
+    if (handleSet) {
+        handleSet.forEach(item => resultArticles.push({ ...item }));
+    }
+
+// === Вент. створка ===
+} else if (openingType === 'vent-sash') {
+
+    const baseSet = hardwareMatrixVentSash.find(row =>
+        h >= row.minHeight && h <= row.maxHeight &&
+        w >= row.minWidth && w <= row.maxWidth
+    );
+
+    if (!baseSet) {
+        showMessage(
+            'Под эти размеры нет зоны для Вентиляционной створки. Проверь диапазоны или обратись к менеджеру.',
             'error'
         );
         return null;
