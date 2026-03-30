@@ -595,7 +595,19 @@ function showMessage(text, type = 'error') {
         return false;
     }
 
-    // Общие габариты по проекту
+    // Общие габариты по проекту (зависят от типа открывания)
+if (openingType === 'vent-sash') {
+    // Для вентиляционной створки
+    if (h < 550 || h > 3000) {
+        showMessage('Высота для Вент. створки должна быть в диапазоне 550–3000 мм.', 'error');
+        return false;
+    }
+    if (w < 170 || w > 300) {
+        showMessage('Ширина для Вент. створки должна быть в диапазоне 170–300 мм.', 'error');
+        return false;
+    }
+} else {
+    // Для всех остальных
     if (h < 500 || h > 3000) {
         showMessage('Высота должна быть в диапазоне 500–3000 мм.', 'error');
         return false;
@@ -604,6 +616,7 @@ function showMessage(text, type = 'error') {
         showMessage('Ширина должна быть в диапазоне 390–1600 мм.', 'error');
         return false;
     }
+}
 
     if (
         openingType !== 'turn-tilt' &&
