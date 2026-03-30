@@ -512,37 +512,48 @@
     openingTypeSelect.addEventListener('change', () => {
         const openingType = openingTypeSelect.value;
 
-    if (openingType === 'top-hung') {
-        if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
-        if (ventNoteGroup) ventNoteGroup.style.display = 'none';
-        hardwareTypeInput.value = 'visible';
+        if (openingType === 'top-hung') {
+            if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
+            if (ventNoteGroup) ventNoteGroup.style.display = 'none';
+            hardwareTypeInput.value = 'visible';
 
-        clampSideGroup.style.display = 'none';
-        clampSideInput.value = 'any';
+            clampSideGroup.style.display = 'none';
+            clampSideInput.value = 'any';
 
     } else if (openingType === 'vent-sash') {
-        // Прячем кнопки типов фурнитуры, показываем текст
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
         if (ventNoteGroup) ventNoteGroup.style.display = '';
-        hardwareTypeInput.value = 'hidden90'; // скрытая логика, чтоб ручки брались как надо
+        hardwareTypeInput.value = 'hidden90';
 
         clampSideGroup.style.display = 'none';
         clampSideInput.value = 'any';
 
     } else {
-        // Обычные режимы
+        // Обычные режимы (П/О, Поворотный, Откидной, Штульповый)
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = '';
         if (ventNoteGroup) ventNoteGroup.style.display = 'none';
 
-        const val = hardwareTypeInput.value;
-        if (val === 'hidden90' || val === 'hidden180') {
-            clampSideGroup.style.display = '';
-        } else {
-            clampSideGroup.style.display = 'none';
-            clampSideInput.value = 'any';
+        // Прячем/показываем Provedal при штульпе
+        const provedalChip = hardwareTypeToggle.querySelector('[data-value="visibleProvedal"]');
+        if (provedalChip) {
+            if (openingType === 'stulp') {
+                // Скрываем Provedal
+                provedalChip.style.display = 'none';
+                // Если был выбран Provedal — перекидываем на visible
+                if (hardwareTypeInput.value === 'visibleProvedal') {
+                    hardwareTypeInput.value = 'visible';
+                    // визуально тоже переключим
+                    [...hardwareTypeToggle.querySelectorAll('.toggle-chip')]
+                        .forEach(c => c.classList.remove('active'));
+                    const visibleChip = hardwareTypeToggle.querySelector('[data-value="visible"]');
+                    if (visibleChip) visibleChip.classList.add('active');
+                }
+            } else {
+                // В остальных типах открывания Provedal показываем
+                provedalChip.style.display = '';
+            }
         }
-    }
-});
+    });
 
 // --- Тоггл типа фурнитуры ---
 if (hardwareTypeToggle && hardwareTypeInput && clampSideGroup) {
