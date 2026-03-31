@@ -4795,17 +4795,70 @@ function groupArticles(items, multiplier) {
     return Array.from(map.values()).sort((a, b) => a.article.localeCompare(b.article));
 }
 
-    function exportToExcel(excelData) {
-    const ws = XLSX.utils.json_to_sheet(excelData);
-    ws['!cols'] = [
-        { wch: 15 },  // артикул
-        { wch: 50 },  // наименование
-        { wch: 10 },  // кол-во
+    function exportToExcel(excelData, alternativeData) {
+    const wb = XLSX.utils.book_new();
+    const wsData = [
+        ['Артикул', 'Наименование', 'Кол-во']
     ];
 
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Фурнитура');
+    // Заполняем основные строки
+    excelData.forEach(item => {
+        wsData.push([item.article, item.name, item.qty]);
+    });
 
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+    // Ширина колонок основной таблицы
+    ws['!cols'] = [
+        { wch: 15 },  // A - артикул
+        { wch: 50 },  // B - наименование
+        { wch: 10 },  // C - кол-во
+        { wch: 5 },   // D - разделитель
+        { wch: 15 },  // E - артикул альтернативы
+        { wch: 50 },  // F - наименование альтернативы
+        { wch: 10 },  // G - кол-во альтернативы
+    ];
+
+    // Жёлтая заливка для KN100OH и KN208AH
+    const yellowArticles = ['KN100OH', 'KN208AH'];
+    excelData.forEach((item, i) => {
+        if (yellowArticles.includes(item.article)) {
+            const rowIndex = i + 2; // +2 потому что строка 1 — заголовок
+            ['A', 'B', 'C'].forEach(col => {
+                const cellRef = `${col}${rowIndex}`;
+                if (!ws[cellRef]) ws[cellRef] = { v: '' };
+                ws[cellRef].s = {
+                    fill: { fgColor: { rgb: 'FFFF00' } }
+                };
+            });
+        }
+    });
+
+    // Альтернатива для штульповой створки
+    if (alternativeData && alternativeData.length > 0) {
+        // Заголовок
+        ws['E1'] = { v: 'Альтернатива для штульповой створки', s: { font: { bold: true } } };
+        ws['F1'] = { v: '' };
+        ws['G1'] = { v: '' };
+
+        alternativeData.forEach((item, i) => {
+            const rowIndex = i + 2;
+            ws[`E${rowIndex}`] = { 
+                v: item.article,
+                s: { fill: { fgColor: { rgb: 'FFFF00' } } }
+            };
+            ws[`F${rowIndex}`] = { 
+                v: item.name,
+                s: { fill: { fgColor: { rgb: 'FFFF00' } } }
+            };
+            ws[`G${rowIndex}`] = { 
+                v: item.qty,
+                s: { fill: { fgColor: { rgb: 'FFFF00' } } }
+            };
+        });
+    }
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Фурнитура');
     const date = new Date().toISOString().slice(0, 10);
     XLSX.writeFile(wb, `KNG_furnitura_${date}.xlsx`);
 }
@@ -4935,16 +4988,36 @@ const excelData = finalGrouped.map(item => ({
     qty: item.qty
 }));
 
+// Проверяем есть ли штульповые с Видимая + ALUTECH
+const hasStulpAlutech = accumulatedResults.some(res => res.isStulpAlutech);
+
+// Альтернативные артикулы (суммируем по кол-ву окон)
+let alternativeData = [];
+if (hasStulpAlutech) {
+    const altMap = new Map();
+    accumulatedResults.forEach(res => {
+        if (!res.isStulpAlutech) return;
+        stulpAlternativeArticles.forEach(item => {
+            const key = item.article;
+            if (!altMap.has(key)) {
+                altMap.set(key, { ...item, qty: 0 });
+            }
+            altMap.get(key).qty += item.qty * res.quantityWindows;
+        });
+    });
+    alternativeData = Array.from(altMap.values());
+}
+
 if (tg) {
-    // как раньше — бот не трогаем
     tg.sendData(JSON.stringify({
         action: 'total',
-        data: excelData
+        data: excelData,
+        alternativeData: alternativeData,
+        yellowArticles: ['KN100OH', 'KN208AH']
     }));
     tg.close();
 } else {
-    // обычная ссылка — скачиваем Excel
-    exportToExcel(excelData);
+    exportToExcel(excelData, alternativeData);
     showMessage('Excel файл сформирован и скачан.', 'success');
 }
 });
