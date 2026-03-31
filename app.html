@@ -5006,6 +5006,7 @@ const excelData = finalGrouped.map(item => ({
 
 // Проверяем есть ли штульповые с Видимая + ALUTECH
 const hasStulpAlutech = accumulatedResults.some(res => res.isStulpAlutech);
+    console.log('hasStulpAlutech:', hasStulpAlutech); // ← добавить
 
 // Альтернативные артикулы (суммируем по кол-ву окон)
 let alternativeData = [];
