@@ -4765,11 +4765,13 @@ if (openingType === 'top-hung') {
   weight: wt,
   openingType,
   hardwareType,
-  profileType: profileTypeInput.value,  // ← добавить эту строку
+  profileType: profileTypeInput.value,
+  hingeColor: hingeColorInput.value,
+  isStulpAlutech: openingType === 'stulp' && hardwareType === 'visible' && profileTypeInput.value === 'alutech',
   clampSide,
   handleColor,
   items: resultArticles
-    };
+};
 }
     
 // === КАСТОМНЫЙ ПОПАП ДЛЯ СКРЫТАЯ 180 / 131–160 КГ ===
