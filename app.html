@@ -4947,6 +4947,7 @@ function finalizeSave(hardwareResult) {
 }
 
 totalBtn.addEventListener('click', () => {
+    console.log('TOTAL BTN CLICKED'); // ← добавить первой строкой
     if (accumulatedResults.length === 0) {
         showMessage('Нет записанных расчётов. Сначала нажмите «Записать».', 'error');
         return;
