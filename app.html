@@ -637,13 +637,27 @@ if (hardwareTypeToggle && hardwareTypeInput && clampSideGroup) {
             .forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
 
-        const val = chip.dataset.value;
+                const val = chip.dataset.value;
         hardwareTypeInput.value = val;
 
         if (val === 'hidden90' || val === 'hidden180') {
             clampSideGroup.style.display = '';
         } else {
             clampSideGroup.style.display = 'none';
+        }
+
+        // Показываем Цвет петель только при Штульповый + Видимая
+        if (openingTypeSelect.value === 'stulp') {
+          if (val === 'visible') {
+            if (hingeColorGroup) hingeColorGroup.style.display = '';
+          } else {
+            if (hingeColorGroup) hingeColorGroup.style.display = 'none';
+            hingeColorInput.value = 'white';
+            [...hingeColorToggle.querySelectorAll('.toggle-chip')]
+              .forEach(c => c.classList.remove('active'));
+            const firstHingeChip = hingeColorToggle.querySelector('[data-value="white"]');
+            if (firstHingeChip) firstHingeChip.classList.add('active');
+          }
         }
     });
 }
