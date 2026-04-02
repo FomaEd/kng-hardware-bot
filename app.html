@@ -4842,6 +4842,143 @@ const hingeArticlesProvedal = {
             width >= row.minWidth && width <= row.maxWidth
         );
     }
+
+    const handleCatalog = {
+  classic_standard: {
+    name: 'Ручка Classic стандартная',
+    category: 'fork',
+    colors: {
+      white: { article: 'KN218HN_9016', name: 'Ручка Classic стандартная белая', qty: 1 },
+      black: { article: 'KN218HN_9005M', name: 'Ручка Classic стандартная чёрная', qty: 1 },
+      raw:   { article: 'KN218HN_C', name: 'Ручка Classic стандартная неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN100KR', name: 'Переходник под ручку Classic', qty: 1 }
+      ],
+      hidden180_turn_tilt: [
+        { article: 'KN100ZC', name: 'Переходник под ручку Classic', qty: 2 }
+      ]
+    }
+  },
+
+  concise_standard: {
+    name: 'Ручка Concise стандартная',
+    category: 'fork',
+    colors: {
+      white: { article: 'KN218JZ_9016', name: 'Ручка Concise стандартная белая', qty: 1 },
+      black: { article: 'KN218JZ_9005M', name: 'Ручка Concise стандартная чёрная', qty: 1 },
+      raw:   { article: 'KN218JZ_C', name: 'Ручка Concise стандартная неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN100KR', name: 'Переходник под ручку Classic', qty: 1 }
+      ],
+      hidden180_turn_tilt: [
+        { article: 'KN100ZC', name: 'Переходник под ручку Classic', qty: 2 }
+      ]
+    }
+  },
+
+  concise_torx: {
+    name: 'Ручка Concise без платформы с Torx штифтом',
+    category: 'torx',
+    colors: {
+      white: { article: 'KN218LR_9016', name: 'Ручка Concise без платформы с Torx штифтом белая', qty: 1 },
+      black: { article: 'KN218LR_9005M', name: 'Ручка Concise без платформы с Torx штифтом чёрная', qty: 1 },
+      raw:   { article: 'KN218LR_C', name: 'Ручка Concise без платформы с Torx штифтом неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN230BH', name: 'Редуктор для ручки с Torx штифтом', qty: 1 }
+      ]
+    }
+  },
+
+  concise_square4_no_plate: {
+    name: 'Ручка Concise без платформы с 4-х гран. штифтом',
+    category: 'square4',
+    colors: {
+      white: { article: 'KN218KL_9016', name: 'Ручка Concise без платформы с 4-х гран. штифтом белая', qty: 1 },
+      black: { article: 'KN218KL_9005M', name: 'Ручка Concise без платформы с 4-х гран. штифтом чёрная', qty: 1 },
+      raw:   { article: 'KN218KL_C', name: 'Ручка Concise без платформы с 4-х гран. штифтом неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN230AO', name: 'Редуктор для ручки с 4-гран. штифтом универсальный, дорн 12мм', qty: 1 }
+      ]
+    }
+  },
+
+  concise_square4_plate: {
+    name: 'Ручка Concise с платформой с 4-х гран. штифтом',
+    category: 'square4',
+    colors: {
+      white: { article: 'KN218KU_9016', name: 'Ручка Concise с платформой с 4-х гран. штифтом белая', qty: 1 },
+      black: { article: 'KN218KU_9005M', name: 'Ручка Concise с платформой с 4-х гран. штифтом чёрная', qty: 1 },
+      raw:   { article: 'KN218KU_C', name: 'Ручка Concise с платформой с 4-х гран. штифтом неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN230AO', name: 'Редуктор для ручки с 4-гран. штифтом универсальный, дорн 12мм', qty: 1 }
+      ]
+    }
+  },
+
+  master_square4_no_plate: {
+    name: 'Ручка Master без платформы с 4-х гран. штифтом',
+    category: 'square4',
+    colors: {
+      white: { article: 'KN218LV_9016', name: 'Ручка Master без платформы с 4-х гран. штифтом белая', qty: 1 },
+      black: { article: 'KN218LV_9005M', name: 'Ручка Master без платформы с 4-х гран. штифтом чёрная', qty: 1 },
+      raw:   { article: 'KN218LV_C', name: 'Ручка Master без платформы с 4-х гран. штифтом неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN230AO', name: 'Редуктор для ручки с 4-гран. штифтом универсальный, дорн 12мм', qty: 1 }
+      ]
+    }
+  },
+
+  master_square4_plate: {
+    name: 'Ручка Master с платформой с 4-х гран. штифтом',
+    category: 'square4',
+    colors: {
+      white: { article: 'KN218LS_9016', name: 'Ручка Master с платформой с 4-х гран. штифтом белая', qty: 1 },
+      black: { article: 'KN218LS_9005M', name: 'Ручка Master с платформой с 4-х гран. штифтом чёрная', qty: 1 },
+      raw:   { article: 'KN218LS_C', name: 'Ручка Master с платформой с 4-х гран. штифтом неокрашенная', qty: 1 }
+    },
+    extras: {
+      default: [
+        { article: 'KN230AO', name: 'Редуктор для ручки с 4-гран. штифтом универсальный, дорн 12мм', qty: 1 }
+      ]
+    }
+  }
+};
+
+function getHandleArticles(handleType, handleColor, openingType, hardwareType) {
+  const handle = handleCatalog[handleType];
+  if (!handle) return [];
+
+  const colorKey = handle.colors[handleColor] ? handleColor : 'white';
+  const result = [];
+
+  result.push({ ...handle.colors[colorKey] });
+
+  const isSpecialForkCase =
+    handle.category === 'fork' &&
+    openingType === 'turn-tilt' &&
+    hardwareType === 'hidden180';
+
+  if (isSpecialForkCase && handle.extras.hidden180_turn_tilt) {
+    handle.extras.hidden180_turn_tilt.forEach(item => result.push({ ...item }));
+  } else if (handle.extras.default) {
+    handle.extras.default.forEach(item => result.push({ ...item }));
+  }
+
+  return result;
+}
+
     
     function calculateHardware() {
         const h = Number(heightInput.value);
@@ -4850,9 +4987,6 @@ const hingeArticlesProvedal = {
         const openingType = openingTypeSelect.value; // 'turn-tilt' | 'turn' | 'tilt' | 'stulp' | 'top-hung'
         const hardwareType = hardwareTypeInput.value;
         const handleType = handleTypeSelect.value;
-        const handleColor = handleColorSelect.value || 'white';
-
-        const clampSide = clampSideInput.value;
         const handleColor = handleColorSelect.value || 'white';
 
     if (!validateInputs()) {
@@ -4884,14 +5018,8 @@ if (openingType === 'top-hung') {
 
     baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-    // Ручка Classic — как у Поворотная + Скрытая 90
-    const handleSet =
-        handleColorArticlesHidden90Turn[handleColor] ||
-        handleColorArticlesHidden90Turn['white'];
-
-    if (handleSet) {
-        handleSet.forEach(item => resultArticles.push({ ...item }));
-    }
+    const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
 // === Вент. створка ===
 } else if (openingType === 'vent-sash') {
@@ -4911,14 +5039,8 @@ if (openingType === 'top-hung') {
 
     baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-    // Ручка Classic — как у Поворотная + Скрытая 90
-    const handleSet =
-        handleColorArticlesHidden90Turn[handleColor] ||
-        handleColorArticlesHidden90Turn['white'];
-
-    if (handleSet) {
-        handleSet.forEach(item => resultArticles.push({ ...item }));
-    }
+    const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
     // === Поворотно-откидной ===
     } else if (openingType === 'turn-tilt') {
@@ -4936,9 +5058,9 @@ if (openingType === 'top-hung') {
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const colorArticles =
-                handleColorArticles[handleColor] || handleColorArticles['white'];
-            colorArticles.forEach(item => resultArticles.push({ ...item }));
+           const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
+
 
             // Петли П/О Видимая
 const hingSetTurnTilt = hingeArticlesTurnTiltVisible[handleColor] || hingeArticlesTurnTiltVisible['white'];
@@ -5026,11 +5148,8 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
                 }
             }
 
-            const handleSet =
-                handleColorArticlesHidden90[handleColor] ||
-                handleColorArticlesHidden90['white'];
-
-            handleSet.forEach(item => resultArticles.push({ ...item }));
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
         } else if (hardwareType === 'hidden180') {
             // Скрытая 180 + Поворотно-откидной (Tilt First)
@@ -5073,11 +5192,9 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
             const clampKey = clampSide === 'right' ? 'articlesRight' : 'articlesLeft';
             baseSet[clampKey].forEach(item => resultArticles.push({ ...item }));
 
-            const handleSetTilt =
-                handleColorArticlesHidden180TurnTilt[handleColor] ||
-                handleColorArticlesHidden180TurnTilt['white'];
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
-            handleSetTilt.forEach(item => resultArticles.push({ ...item }));
 
         } else {
             showMessage(
@@ -5135,10 +5252,9 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
             const clampKey = clampSide === 'right' ? 'articlesRight' : 'articlesLeft';
             baseSet[clampKey].forEach(item => resultArticles.push({ ...item }));
 
-            const handleSet =
-                handleColorArticlesHidden90Turn[handleColor] ||
-                handleColorArticlesHidden90Turn['white'];
-            handleSet.forEach(item => resultArticles.push({ ...item }));
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
+
 
         } else if (hardwareType === 'hidden90') {
             // Скрытая 90 + Поворотная
@@ -5174,10 +5290,9 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
 
                 baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-                const handleSet =
-                    handleColorArticlesHidden90Turn[handleColor] ||
-                    handleColorArticlesHidden90Turn['white'];
-                handleSet.forEach(item => resultArticles.push({ ...item }));
+                const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
+
 
             } else {
                 // 101–150 кг, учитываем сторону прижима
@@ -5216,10 +5331,8 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
 
                 clampArticles.forEach(item => resultArticles.push({ ...item }));
 
-                const handleSet =
-                    handleColorArticlesHidden90Turn[handleColor] ||
-                    handleColorArticlesHidden90Turn['white'];
-                handleSet.forEach(item => resultArticles.push({ ...item }));
+                const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
             }
 
         } else if (hardwareType === 'visible') {
@@ -5239,11 +5352,9 @@ hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const colorArticles =
-                handleColorArticlesTurnVisible[handleColor] ||
-                handleColorArticlesTurnVisible['white'];
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
-            colorArticles.forEach(item => resultArticles.push({ ...item }));
             
             // Петли в зависимости от высоты
 let hingeQtyTurn = 2;
@@ -5270,16 +5381,8 @@ resultArticles.push({ ...hingeItemTurn, qty: hingeQtyTurn });
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const zoneKey = (h >= 500 && h <= 1300) ? 'zone1' : 'zone2';
-
-            const turnHandleByZone = handleColorArticlesProvedalTurn[zoneKey];
-            const colorArticles =
-                (turnHandleByZone && turnHandleByZone[handleColor]) ||
-                (turnHandleByZone && turnHandleByZone['white']);
-
-            if (colorArticles) {
-                colorArticles.forEach(item => resultArticles.push({ ...item }));
-            }
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
             // Петли Поворотный Provedal — кол-во от высоты
 const hingeQtyProvedalTurn = (h >= 500 && h <= 1300) ? 2 : 3;
@@ -5314,16 +5417,9 @@ resultArticles.push({ ...hingeItemProvedalTurn, qty: hingeQtyProvedalTurn });
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const zoneKey = (w >= 445 && w <= 1000) ? 'zone1' : 'zone2';
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
-            const tiltHandleByZone = handleColorArticlesTiltVisible[zoneKey];
-            const colorArticles =
-                (tiltHandleByZone && tiltHandleByZone[handleColor]) ||
-                (tiltHandleByZone && tiltHandleByZone['white']);
-
-            if (colorArticles) {
-                colorArticles.forEach(item => resultArticles.push({ ...item }));
-            }
 
             // Петли Откидной Видимая — кол-во от ширины
 const hingeQtyTilt = (w >= 445 && w <= 1000) ? 2 : 3;
@@ -5356,16 +5452,8 @@ resultArticles.push({ ...hingeItemTilt, qty: hingeQtyTilt });
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const zoneKey = (w >= 500 && w <= 1300) ? 'zone1' : 'zone2';
-
-            const tiltHandleByZone = handleColorArticlesProvedalTilt[zoneKey];
-            const colorArticles =
-                (tiltHandleByZone && tiltHandleByZone[handleColor]) ||
-                (tiltHandleByZone && tiltHandleByZone['white']);
-
-            if (colorArticles) {
-                colorArticles.forEach(item => resultArticles.push({ ...item }));
-            }
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
             // Петли Откидной Provedal — кол-во от ширины
 const hingeQtyProvedalTilt = (w >= 500 && w <= 1300) ? 2 : 3;
@@ -5404,13 +5492,9 @@ resultArticles.push({ ...hingeItemProvedalTilt, qty: hingeQtyProvedalTilt });
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const handleSet =
-                handleColorArticlesHidden90Turn[handleColor] ||
-                handleColorArticlesHidden90Turn['white'];
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, 'hidden90');
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
-            if (handleSet) {
-                handleSet.forEach(item => resultArticles.push({ ...item }));
-            }
 
         } else if (hardwareType === 'hidden90') {
             // Скрытая 90 + Откидной
@@ -5443,10 +5527,8 @@ resultArticles.push({ ...hingeItemProvedalTilt, qty: hingeQtyProvedalTilt });
 
             baseSet.articles.forEach(item => resultArticles.push({ ...item }));
 
-            const handleSet =
-                handleColorArticlesHidden90Tilt[handleColor] ||
-                handleColorArticlesHidden90Tilt['white'];
-            handleSet.forEach(item => resultArticles.push({ ...item }));
+            const handleItems = getHandleArticles(handleType, handleColor, openingType, hardwareType);
+handleItems.forEach(item => resultArticles.push({ ...item }));
 
         } else {
             showMessage(
