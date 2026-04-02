@@ -4733,15 +4733,55 @@ const hingeColorArticlesStulp = {
 };
 
     const hingeArticlesTurnVisible = {
-  white: 'KN219CC_9016',
-  black: 'KN219CC_9005M',
-  raw:   'KN219CC_C',
+  white: { article: 'KN219CC_9016', name: 'Петля поворотная 3-хсекц.бел.', qty: 1 },
+  black: { article: 'KN219CC_9005M', name: 'Петля поворотная 3-хсекц черн. matt', qty: 1 },
+  raw:   { article: 'KN219CC_C', name: 'Петля поворотная 3-хсекц неокр', qty: 1 },
 };
 
-const hingeNamesTurnVisible = {
-  white: 'Петля поворотная 3-хсекц.бел.',
-  black: 'Петля поворотная 3-хсекц черн. matt',
-  raw:   'Петля поворотная 3-хсекц неокр',
+    // Петли П/О Видимая
+const hingeArticlesTurnTiltVisible = {
+  white: [
+    { article: 'KN219DL_9016', name: 'Петля ПО верхняя бел', qty: 1 },
+    { article: 'KN219DK_9016', name: 'Петля ПО нижняя бел.', qty: 1 },
+  ],
+  black: [
+    { article: 'KN219DL_9005M', name: 'Петля ПО верхняя черн. matt', qty: 1 },
+    { article: 'KN219DK_9005M', name: 'Петля ПО нижняя черн. matt', qty: 1 },
+  ],
+  raw: [
+    { article: 'KN219DL_C', name: 'Петля ПО верхняя неокр', qty: 1 },
+    { article: 'KN219DK_C', name: 'Петля ПО нижняя неокр', qty: 1 },
+  ],
+};
+
+// Петли Откидной Видимая
+const hingeArticlesTiltVisible = {
+  white: { article: 'KN219CC_9016', name: 'Петля поворотная 3-хсекц.бел.', qty: 1 },
+  black: { article: 'KN219CC_9005M', name: 'Петля поворотная 3-хсекц черн. matt', qty: 1 },
+  raw:   { article: 'KN219CC_C', name: 'Петля поворотная 3-хсекц неокр', qty: 1 },
+};
+
+// Петли П/О Provedal
+const hingeArticlesProvedalTurnTilt = {
+  white: [
+    { article: 'KN219HT_9016', name: 'Петля ПО верхняя бел', qty: 1 },
+    { article: 'KN219HS_9016', name: 'Петля ПО нижняя бел.', qty: 1 },
+  ],
+  black: [
+    { article: 'KN219HT_9005M', name: 'Петля ПО верхняя черн. matt', qty: 1 },
+    { article: 'KN219HS_9005M', name: 'Петля ПО нижняя черн. matt', qty: 1 },
+  ],
+  raw: [
+    { article: 'KN219HT_C', name: 'Петля ПО верхняя неокр', qty: 1 },
+    { article: 'KN219HS_C', name: 'Петля ПО нижняя неокр', qty: 1 },
+  ],
+};
+
+// Петли Поворотный и Откидной Provedal
+const hingeArticlesProvedal = {
+  white: { article: 'KN219HX_9016', name: 'Петля поворотная бел.', qty: 1 },
+  black: { article: 'KN219HX_9005M', name: 'Петля поворотная черн. matt', qty: 1 },
+  raw:   { article: 'KN219HX_C', name: 'Петля поворотная неокр', qty: 1 },
 };
 
     const handleColorArticlesTiltVisible = {
@@ -4891,6 +4931,10 @@ if (openingType === 'top-hung') {
                 handleColorArticles[handleColor] || handleColorArticles['white'];
             colorArticles.forEach(item => resultArticles.push({ ...item }));
 
+            // Петли П/О Видимая
+const hingSetTurnTilt = hingeArticlesTurnTiltVisible[handleColor] || hingeArticlesTurnTiltVisible['white'];
+hingSetTurnTilt.forEach(item => resultArticles.push({ ...item }));
+
         } else if (hardwareType === 'visibleProvedal') {
             // Видимая Provedal + Поворотно-откидной
             const baseSet = hardwareMatrixVisibleProvedalTurnTilt.find(row =>
@@ -4913,6 +4957,10 @@ if (openingType === 'top-hung') {
                 handleColorArticlesProvedalTurnTilt['white'];
 
             colorArticles.forEach(item => resultArticles.push({ ...item }));
+
+            // Петли П/О Provedal
+const hingSetProvedalTT = hingeArticlesProvedalTurnTilt[handleColor] || hingeArticlesProvedalTurnTilt['white'];
+hingSetProvedalTT.forEach(item => resultArticles.push({ ...item }));
 
         } else if (hardwareType === 'hidden90') {
             // Скрытая 90 + Поворотно-откидной
@@ -5193,11 +5241,8 @@ let hingeQtyTurn = 2;
 if (h >= 1201 && h <= 1800) hingeQtyTurn = 3;
 else if (h >= 1801 && h <= 2400) hingeQtyTurn = 4;
 
-resultArticles.push({
-  article: hingeArticlesTurnVisible[handleColor] || hingeArticlesTurnVisible['white'],
-  name: hingeNamesTurnVisible[handleColor] || hingeNamesTurnVisible['white'],
-  qty: hingeQtyTurn
-});
+const hingeItemTurn = hingeArticlesTurnVisible[handleColor] || hingeArticlesTurnVisible['white'];
+resultArticles.push({ ...hingeItemTurn, qty: hingeQtyTurn });
 
         } else if (hardwareType === 'visibleProvedal') {
             // Видимая Provedal + Поворотный
@@ -5226,6 +5271,11 @@ resultArticles.push({
             if (colorArticles) {
                 colorArticles.forEach(item => resultArticles.push({ ...item }));
             }
+
+            // Петли Поворотный Provedal — кол-во от высоты
+const hingeQtyProvedalTurn = (h >= 500 && h <= 1300) ? 2 : 3;
+const hingeItemProvedalTurn = hingeArticlesProvedal[handleColor] || hingeArticlesProvedal['white'];
+resultArticles.push({ ...hingeItemProvedalTurn, qty: hingeQtyProvedalTurn });
 
         } else {
             showMessage(
@@ -5266,6 +5316,11 @@ resultArticles.push({
                 colorArticles.forEach(item => resultArticles.push({ ...item }));
             }
 
+            // Петли Откидной Видимая — кол-во от ширины
+const hingeQtyTilt = (w >= 445 && w <= 1000) ? 2 : 3;
+const hingeItemTilt = hingeArticlesTiltVisible[handleColor] || hingeArticlesTiltVisible['white'];
+resultArticles.push({ ...hingeItemTilt, qty: hingeQtyTilt });
+
         } else if (hardwareType === 'visibleProvedal') {
             // Видимая Provedal + Откидной
             const baseSet = hardwareMatrixVisibleProvedalTilt.find(row =>
@@ -5302,6 +5357,11 @@ resultArticles.push({
             if (colorArticles) {
                 colorArticles.forEach(item => resultArticles.push({ ...item }));
             }
+
+            // Петли Откидной Provedal — кол-во от ширины
+const hingeQtyProvedalTilt = (w >= 500 && w <= 1300) ? 2 : 3;
+const hingeItemProvedalTilt = hingeArticlesProvedal[handleColor] || hingeArticlesProvedal['white'];
+resultArticles.push({ ...hingeItemProvedalTilt, qty: hingeQtyProvedalTilt });
 
         } else if (hardwareType === 'hidden180') {
             // Скрытая 180 + Откидной, до 130 кг
