@@ -4849,6 +4849,9 @@ const hingeArticlesProvedal = {
         const wt = Number(weightInput.value);
         const openingType = openingTypeSelect.value; // 'turn-tilt' | 'turn' | 'tilt' | 'stulp' | 'top-hung'
         const hardwareType = hardwareTypeInput.value;
+        const handleType = handleTypeSelect.value;
+        const handleColor = handleColorSelect.value || 'white';
+
         const clampSide = clampSideInput.value;
         const handleColor = handleColorSelect.value || 'white';
 
@@ -5695,6 +5698,7 @@ resultArticles.push({ ...hingeItemProvedalTilt, qty: hingeQtyProvedalTilt });
   isStulpAlutech: openingType === 'stulp' && profileTypeInput.value === 'alutech' &&
   (hardwareType === 'visible' || hardwareType === 'hidden90' || hardwareType === 'hidden180'),
   clampSide,
+  handleType,
   handleColor,
   items: resultArticles
 };
