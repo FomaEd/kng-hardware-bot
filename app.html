@@ -455,7 +455,7 @@
 
                 <div class="section-title">Форма и цвет ручки</div>
 
-<div class="form-group">
+<div class="form-group" id="handleTypeGroup">
     <label for="handleType">Форма</label>
     <select id="handleType" class="select">
     <option value="classic_standard" selected>Ручка Classic стандартная</option>
@@ -549,6 +549,7 @@
     const hingeColorToggle = document.getElementById('hingeColorToggle');
     const hingeColorInput = document.getElementById('hingeColor');
     const handleGroup = document.getElementById('handleGroup');
+    const handleTypeGroup = document.getElementById('handleTypeGroup');
 
     const heightInput = document.getElementById('height');
     const widthInput = document.getElementById('width');
@@ -568,19 +569,20 @@
     const accumulatedResults = [];
 
     openingTypeSelect.addEventListener('change', () => {
-        const openingType = openingTypeSelect.value;
+    const openingType = openingTypeSelect.value;
 
-        if (openingType === 'top-hung') {
-            if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
-            if (ventNoteGroup) ventNoteGroup.style.display = 'none';
-            hardwareTypeInput.value = 'visible';
+    if (openingType === 'top-hung') {
+        if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
+        if (ventNoteGroup) ventNoteGroup.style.display = 'none';
+        hardwareTypeInput.value = 'visible';
 
-            clampSideGroup.style.display = 'none';
-            clampSideInput.value = 'any';
-            if (profileTypeGroup) profileTypeGroup.style.display = 'none';
-            if (handleGroup) handleGroup.style.display = '';       
-            if (hingeColorGroup) hingeColorGroup.style.display = 'none'; 
-            if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none'; 
+        clampSideGroup.style.display = 'none';
+        clampSideInput.value = 'any';
+        if (profileTypeGroup) profileTypeGroup.style.display = 'none';
+        if (handleGroup) handleGroup.style.display = '';
+        if (handleTypeGroup) handleTypeGroup.style.display = '';
+        if (hingeColorGroup) hingeColorGroup.style.display = 'none';
+        if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
 
     } else if (openingType === 'vent-sash') {
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
@@ -591,70 +593,73 @@
         clampSideInput.value = 'any';
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (handleGroup) handleGroup.style.display = '';
+        if (handleTypeGroup) handleTypeGroup.style.display = '';
         if (hingeColorGroup) hingeColorGroup.style.display = 'none';
         if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
 
+    } else if (openingType === 'lift-slide') {
+        if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
+        if (ventNoteGroup) ventNoteGroup.style.display = 'none';
+        hardwareTypeInput.value = 'visible';
+
+        clampSideGroup.style.display = 'none';
+        clampSideInput.value = 'any';
+        if (profileTypeGroup) profileTypeGroup.style.display = 'none';
+        if (hingeColorGroup) hingeColorGroup.style.display = 'none';
+
+        if (handleGroup) handleGroup.style.display = '';
+        if (handleTypeGroup) handleTypeGroup.style.display = 'none';
+        if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = '';
+
     } else {
-        // Обычные режимы (П/О, Поворотный, Откидной, Штульповый)
         if (hardwareTypeGroup) hardwareTypeGroup.style.display = '';
         if (ventNoteGroup) ventNoteGroup.style.display = 'none';
 
-        // Прячем/показываем Provedal при штульпе
         const provedalChip = hardwareTypeToggle.querySelector('[data-value="visibleProvedal"]');
         if (provedalChip) {
             if (openingType === 'stulp') {
-                // Скрываем Provedal
                 provedalChip.style.display = 'none';
-                // Если был выбран Provedal — перекидываем на visible
                 if (hardwareTypeInput.value === 'visibleProvedal') {
                     hardwareTypeInput.value = 'visible';
-                    // визуально тоже переключим
                     [...hardwareTypeToggle.querySelectorAll('.toggle-chip')]
                         .forEach(c => c.classList.remove('active'));
                     const visibleChip = hardwareTypeToggle.querySelector('[data-value="visible"]');
                     if (visibleChip) visibleChip.classList.add('active');
                 }
             } else {
-            // В остальных типах открывания Provedal показываем
-            provedalChip.style.display = '';
-          }
-        }
-        if (profileTypeGroup) {
-          if (openingType === 'stulp') {
-            profileTypeGroup.style.display = '';
-          } else {
-            profileTypeGroup.style.display = 'none';
-            profileTypeInput.value = 'alutech';
-            [...profileTypeToggle.querySelectorAll('.toggle-chip')]
-              .forEach(c => c.classList.remove('active'));
-            const firstChip = profileTypeToggle.querySelector('[data-value="alutech"]');
-            if (firstChip) firstChip.classList.add('active');
-          }
-        }
-                    if (openingType === 'stulp') {
-          if (handleGroup) handleGroup.style.display = 'none';
-          if (hingeColorGroup) hingeColorGroup.style.display = '';
-        } else {
-          if (handleGroup) handleGroup.style.display = '';
-          if (hingeColorGroup) hingeColorGroup.style.display = 'none';
-          hingeColorInput.value = 'white';
-          [...hingeColorToggle.querySelectorAll('.toggle-chip')]
-            .forEach(c => c.classList.remove('active'));
-          const firstHingeChip = hingeColorToggle.querySelector('[data-value="white"]');
-          if (firstHingeChip) firstHingeChip.classList.add('active');
-        }
-           
-            if (openingType === 'lift-slide') {
-              if (hardwareTypeGroup) hardwareTypeGroup.style.display = 'none';
-              if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = '';
-              if (handleGroup) handleGroup.style.display = '';
-              if (hingeColorGroup) hingeColorGroup.style.display = 'none';
-              if (profileTypeGroup) profileTypeGroup.style.display = 'none';
-              clampSideGroup.style.display = 'none';
-            } else {
-              if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
+                provedalChip.style.display = '';
             }
         }
+
+        if (profileTypeGroup) {
+            if (openingType === 'stulp') {
+                profileTypeGroup.style.display = '';
+            } else {
+                profileTypeGroup.style.display = 'none';
+                profileTypeInput.value = 'alutech';
+                [...profileTypeToggle.querySelectorAll('.toggle-chip')]
+                    .forEach(c => c.classList.remove('active'));
+                const firstChip = profileTypeToggle.querySelector('[data-value="alutech"]');
+                if (firstChip) firstChip.classList.add('active');
+            }
+        }
+
+        if (openingType === 'stulp') {
+            if (handleGroup) handleGroup.style.display = 'none';
+            if (hingeColorGroup) hingeColorGroup.style.display = '';
+        } else {
+            if (handleGroup) handleGroup.style.display = '';
+            if (hingeColorGroup) hingeColorGroup.style.display = 'none';
+            hingeColorInput.value = 'white';
+            [...hingeColorToggle.querySelectorAll('.toggle-chip')]
+                .forEach(c => c.classList.remove('active'));
+            const firstHingeChip = hingeColorToggle.querySelector('[data-value="white"]');
+            if (firstHingeChip) firstHingeChip.classList.add('active');
+        }
+
+        if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
+        if (handleTypeGroup) handleTypeGroup.style.display = '';
+    }
 });
 
 // --- Тоггл типа фурнитуры ---
