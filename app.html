@@ -453,7 +453,7 @@
                 <div id="handleGroup">
                 <div class="section-divider"></div>
 
-                <div class="section-title">Форма и цвет ручки</div>
+                <div class="section-title" id="handleGroupTitle">Форма и цвет ручки</div>
 
 <div class="form-group" id="handleTypeGroup">
     <label for="handleType">Форма</label>
@@ -468,7 +468,7 @@
 </select>
                     </div>
                     <div class="form-group">
-    <label for="handleColor">Цвет</label>
+    <label for="handleColor" id="handleColorLabel">Цвет</label>
     <select id="handleColor" class="select">
         <option value="" disabled selected hidden>Выберите</option>
         <option value="white">Белый (9016)</option>
@@ -548,7 +548,9 @@
     const hingeColorGroup = document.getElementById('hingeColorGroup');
     const hingeColorToggle = document.getElementById('hingeColorToggle');
     const hingeColorInput = document.getElementById('hingeColor');
+    const handleColorLabel = document.getElementById('handleColorLabel');
     const handleGroup = document.getElementById('handleGroup');
+    const handleGroupTitle = document.getElementById('handleGroupTitle');
     const handleTypeGroup = document.getElementById('handleTypeGroup');
 
     const heightInput = document.getElementById('height');
@@ -581,6 +583,8 @@
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (handleGroup) handleGroup.style.display = '';
         if (handleTypeGroup) handleTypeGroup.style.display = '';
+        if (handleGroupTitle) handleGroupTitle.textContent = 'Форма и цвет ручки';
+        if (handleColorLabel) handleColorLabel.style.display = '';
         if (hingeColorGroup) hingeColorGroup.style.display = 'none';
         if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
 
@@ -594,6 +598,8 @@
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (handleGroup) handleGroup.style.display = '';
         if (handleTypeGroup) handleTypeGroup.style.display = '';
+        if (handleGroupTitle) handleGroupTitle.textContent = 'Форма и цвет ручки';
+        if (handleColorLabel) handleColorLabel.style.display = '';
         if (hingeColorGroup) hingeColorGroup.style.display = 'none';
         if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
 
@@ -609,6 +615,8 @@
 
         if (handleGroup) handleGroup.style.display = '';
         if (handleTypeGroup) handleTypeGroup.style.display = 'none';
+        if (handleGroupTitle) handleGroupTitle.textContent = 'Цвет ручки';
+        if (handleColorLabel) handleColorLabel.style.display = 'none';
         if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = '';
 
     } else {
@@ -659,6 +667,8 @@
 
         if (liftSlideHandleGroup) liftSlideHandleGroup.style.display = 'none';
         if (handleTypeGroup) handleTypeGroup.style.display = '';
+        if (handleGroupTitle) handleGroupTitle.textContent = 'Форма и цвет ручки';
+        if (handleColorLabel) handleColorLabel.style.display = '';
     }
 });
 
