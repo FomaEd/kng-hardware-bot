@@ -570,6 +570,21 @@
 
     const accumulatedResults = [];
 
+    function setClampSide(value = 'any') {
+    const allowed = ['left', 'right', 'any'];
+    const nextValue = allowed.includes(value) ? value : 'any';
+
+    clampSideInput.value = nextValue;
+
+    if (clampSideToggle) {
+        [...clampSideToggle.querySelectorAll('.toggle-chip')]
+            .forEach(chip => chip.classList.remove('active'));
+
+        const activeChip = clampSideToggle.querySelector(`[data-value="${nextValue}"]`);
+        if (activeChip) activeChip.classList.add('active');
+    }
+}
+
     openingTypeSelect.addEventListener('change', () => {
     const openingType = openingTypeSelect.value;
 
@@ -579,7 +594,7 @@
         hardwareTypeInput.value = 'visible';
 
         clampSideGroup.style.display = 'none';
-        clampSideInput.value = 'any';
+        setClampSide('any');
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (handleGroup) handleGroup.style.display = '';
         if (handleTypeGroup) handleTypeGroup.style.display = '';
@@ -594,7 +609,7 @@
         hardwareTypeInput.value = 'hidden90';
 
         clampSideGroup.style.display = 'none';
-        clampSideInput.value = 'any';
+        setClampSide('any');
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (handleGroup) handleGroup.style.display = '';
         if (handleTypeGroup) handleTypeGroup.style.display = '';
@@ -609,7 +624,7 @@
         hardwareTypeInput.value = 'visible';
 
         clampSideGroup.style.display = 'none';
-        clampSideInput.value = 'any';
+        setClampSide('any');
         if (profileTypeGroup) profileTypeGroup.style.display = 'none';
         if (hingeColorGroup) hingeColorGroup.style.display = 'none';
 
@@ -688,10 +703,12 @@ if (hardwareTypeToggle && hardwareTypeInput && clampSideGroup) {
         hardwareTypeInput.value = val;
 
         if (val === 'hidden90' || val === 'hidden180') {
-            clampSideGroup.style.display = '';
-        } else {
-            clampSideGroup.style.display = 'none';
-        }
+    clampSideGroup.style.display = '';
+    setClampSide('any');
+} else {
+    clampSideGroup.style.display = 'none';
+    setClampSide('any');
+}
 
         // Показываем Цвет петель только при Штульповый + Видимая
         if (openingTypeSelect.value === 'stulp') {
