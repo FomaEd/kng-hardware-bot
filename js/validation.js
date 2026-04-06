@@ -9,6 +9,8 @@ function validateInputs() {
     const wt = Number(weightInput.value);
     const openingType = openingTypeSelect.value;
     const hardwareType = hardwareTypeInput.value;
+    const clampSide = clampSideInput.value;
+
 
     if (!h || !w || !wt) {
         showMessage('Заполни высоту, ширину и вес створки.', 'error');
@@ -119,6 +121,20 @@ function validateInputs() {
 
         if (openingType === 'tilt' && wt > 130) {
             showMessage('Максимальный вес для Скрытая 180 Откидная — 130 кг.', 'error');
+            return false;
+        }
+    }
+
+        // ОБЯЗАТЕЛЬНАЯ СТОРОНА ПРИЖИМА ДЛЯ СКРЫТОЙ ФУРНИТУРЫ
+    if (
+        (hardwareType === 'hidden90' || hardwareType === 'hidden180') &&
+        (openingType === 'turn-tilt' || openingType === 'turn' || openingType === 'stulp')
+    ) {
+        if (!clampSide) {
+            showMessage(
+                'Для скрытой фурнитуры в этих конфигурациях обязательно выберите сторону прижима.',
+                'error'
+            );
             return false;
         }
     }
