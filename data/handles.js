@@ -356,5 +356,30 @@ const hingeArticlesProvedal = {
   black: { article: 'KN219HX_9005M', name: 'Петля поворотная черн. matt', qty: 1 },
   raw:   { article: 'KN219HX_C', name: 'Петля поворотная неокр', qty: 1 },
 };
-  return result;
-}
+
+// ============================================
+// ФУНКЦИЯ ПОДБОРА РУЧЕК
+// ============================================
+function getHandleArticles(handleType, handleColor, openingType, hardwareType) {
+    const result = [];
+
+    // Получаем базовую конфигурацию ручки из каталога
+    const handleConfig = handleCatalog[handleType];
+    if (!handleConfig) {
+        console.error(`Неизвестный тип ручки: ${handleType}`);
+        return result;
+    }
+
+    // Добавляем саму ручку
+    const handleArticle = handleConfig.colors[handleColor] || handleConfig.colors['white'];
+    if (handleArticle) {
+        result.push({ ...handleArticle });
+    }
+
+    // Добавляем дополнительные артикулы (переходники, редукторы)
+    const extrasKey = (hardwareType === 'hidden180' && openingType === 'turn-tilt')
+        ? 'hidden180_turn_tilt'
+        : 'default';
+
+    const extras = handleConfig.extras[extrasKey] || handleConfig.extras['default'] || [];
+    extras.forEach(item => result.push({ ...item }));
