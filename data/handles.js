@@ -356,27 +356,5 @@ const hingeArticlesProvedal = {
   black: { article: 'KN219HX_9005M', name: 'Петля поворотная черн. matt', qty: 1 },
   raw:   { article: 'KN219HX_C', name: 'Петля поворотная неокр', qty: 1 },
 };
-
-// Утилиты
-function getHandleArticles(handleType, handleColor, openingType, hardwareType) {
-  const handle = handleCatalog[handleType];
-  if (!handle) return [];
-
-  const colorKey = handle.colors[handleColor] ? handleColor : 'white';
-  const result = [];
-
-  result.push({ ...handle.colors[colorKey] });
-
-  const isSpecialForkCase =
-    handle.category === 'fork' &&
-    openingType === 'turn-tilt' &&
-    hardwareType === 'hidden180';
-
-  if (isSpecialForkCase && handle.extras.hidden180_turn_tilt) {
-    handle.extras.hidden180_turn_tilt.forEach(item => result.push({ ...item }));
-  } else if (handle.extras.default) {
-    handle.extras.default.forEach(item => result.push({ ...item }));
-  }
-
   return result;
 }
