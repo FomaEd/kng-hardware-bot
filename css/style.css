@@ -317,3 +317,41 @@
             box-shadow: 0 4px 10px rgba(32,128,128,0.35);
             opacity: 0.95;
         }
+
+.saved-windows-wrap {
+    margin-top: 16px;
+}
+
+.saved-windows-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.saved-windows-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.saved-window-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f5f7fb;
+    border: 1px solid #dbe2ea;
+}
+
+.saved-window-text {
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.saved-window-check {
+    font-size: 16px;
+    font-weight: 700;
+    color: #22c55e;
+}
