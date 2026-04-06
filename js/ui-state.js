@@ -29,14 +29,9 @@ const hardwareTypeGroup = document.getElementById('hardwareTypeGroup');
     const handleColorSelect = document.getElementById('handleColor');
     const quantityInput = document.getElementById('quantity');
 
-    const saveBtn = document.getElementById('saveBtn');
-    const totalBtn = document.getElementById('totalBtn');
-
     const messageBox = document.getElementById('messageBox');
     const accumulatedCounter = document.getElementById('accumulatedCounter');
     const accumulatedCountElement = document.getElementById('accumulatedCount');
-
-    const accumulatedResults = [];
 
     function setClampSide(value = 'any') {
     const allowed = ['left', 'right', 'any'];
