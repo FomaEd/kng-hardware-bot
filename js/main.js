@@ -1,11 +1,11 @@
 const tg = window.Telegram ? window.Telegram.WebApp : null;
 
-    if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.MainButton.hide();
-    }
-    
+if (tg) {
+    tg.ready();
+    tg.expand();
+    tg.MainButton.hide();
+}
+
 // === КАСТОМНЫЙ ПОПАП ДЛЯ СКРЫТАЯ 180 / 131–160 КГ ===
 const angleWarningOverlay = document.getElementById('angleWarningOverlay');
 const angleWarningOkBtn = document.getElementById('angleWarningOkBtn');
@@ -127,46 +127,46 @@ totalBtn.addEventListener('click', async () => {
         texts.push(`• ${item.article} — ${item.name} — ${item.qty} шт.`);
     });
 
-    const finalText = texts.join('\n');
+    const finalText = texts.join('\\n');
 
-const excelData = finalGrouped.map(item => ({
-    article: item.article,
-    name: item.name,
-    qty: item.qty
-}));
-
-// Проверяем есть ли штульповые с Видимая + ALUTECH
-const hasStulpAlutech = accumulatedResults.some(res => res.isStulpAlutech);
-    
-// Альтернативные артикулы (суммируем по кол-ву окон)
-let alternativeData = [];
-if (hasStulpAlutech) {
-    const altMap = new Map();
-    accumulatedResults.forEach(res => {
-        if (!res.isStulpAlutech) return;
-        stulpAlternativeArticles.forEach(item => {
-            const key = item.article;
-            if (!altMap.has(key)) {
-                altMap.set(key, { ...item, qty: 0 });
-            }
-            altMap.get(key).qty += item.qty * res.quantityWindows;
-        });
-    });
-    alternativeData = Array.from(altMap.values());
-}
-
-if (tg) {
-    tg.sendData(JSON.stringify({
-        action: 'total',
-        data: excelData,
-        alternativeData: alternativeData,
-        yellowArticles: ['KN100OH', 'KN208AH']
+    const excelData = finalGrouped.map(item => ({
+        article: item.article,
+        name: item.name,
+        qty: item.qty
     }));
-    tg.close();
-} else {
-    const ok = await exportToExcel(excelData, alternativeData);
-    if (ok) {
-        showMessage('Excel файл сформирован и скачан.', 'success');
+
+    // Проверяем есть ли штульповые с Видимая + ALUTECH
+    const hasStulpAlutech = accumulatedResults.some(res => res.isStulpAlutech);
+
+    // Альтернативные артикулы (суммируем по кол-ву окон)
+    let alternativeData = [];
+    if (hasStulpAlutech) {
+        const altMap = new Map();
+        accumulatedResults.forEach(res => {
+            if (!res.isStulpAlutech) return;
+            stulpAlternativeArticles.forEach(item => {
+                const key = item.article;
+                if (!altMap.has(key)) {
+                    altMap.set(key, { ...item, qty: 0 });
+                }
+                altMap.get(key).qty += item.qty * res.quantityWindows;
+            });
+        });
+        alternativeData = Array.from(altMap.values());
     }
-}
+
+    if (tg) {
+        tg.sendData(JSON.stringify({
+            action: 'total',
+            data: excelData,
+            alternativeData: alternativeData,
+            yellowArticles: ['KN100OH', 'KN208AH']
+        }));
+        tg.close();
+    } else {
+        const ok = await exportToExcel(excelData, alternativeData);
+        if (ok) {
+            showMessage('Excel файл сформирован и скачан.', 'success');
+        }
+    }
 });
