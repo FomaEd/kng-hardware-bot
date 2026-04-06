@@ -64,12 +64,12 @@
         .header-text {
     display: flex;
     align-items: flex-start;
-    padding-top: 5px;
+    padding-top: 1px;
 }
 
         .title {
     margin: 0;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 800;
     line-height: 1;
     color: #111;
