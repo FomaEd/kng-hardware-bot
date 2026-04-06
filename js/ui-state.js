@@ -17,6 +17,28 @@
     }
 }
 
+function isClampSideRequired(openingType, hardwareType) {
+    return (
+        (hardwareType === 'hidden90' || hardwareType === 'hidden180') &&
+        (openingType === 'turn-tilt' || openingType === 'turn')
+    );
+}
+
+function updateClampSideVisibility() {
+    const openingType = openingTypeSelect.value;
+    const hardwareType = hardwareTypeInput.value;
+    const shouldShow = isClampSideRequired(openingType, hardwareType);
+
+    if (!clampSideGroup) return;
+
+    if (shouldShow) {
+        clampSideGroup.style.display = '';
+    } else {
+        clampSideGroup.style.display = 'none';
+        setClampSide('any');
+    }
+}
+
     openingTypeSelect.addEventListener('change', () => {
     const openingType = openingTypeSelect.value;
 
@@ -116,6 +138,8 @@
         if (handleTypeGroup) handleTypeGroup.style.display = '';
         if (handleGroupTitle) handleGroupTitle.textContent = 'Форма и цвет ручки';
         if (handleColorLabel) handleColorLabel.style.display = '';
+
+        updateClampSideVisibility();
     }
 });
 
@@ -134,13 +158,7 @@ if (hardwareTypeToggle && hardwareTypeInput && clampSideGroup) {
                 const val = chip.dataset.value;
         hardwareTypeInput.value = val;
 
-        if (val === 'hidden90' || val === 'hidden180') {
-    clampSideGroup.style.display = '';
-    setClampSide('any');
-} else {
-    clampSideGroup.style.display = 'none';
-    setClampSide('any');
-}
+        updateClampSideVisibility();
 
         // Показываем Цвет петель только при Штульповый + Видимая
         if (openingTypeSelect.value === 'stulp') {
