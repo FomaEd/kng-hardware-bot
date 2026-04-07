@@ -19,12 +19,10 @@
 
 function isClampSideRequired(openingType, hardwareType) {
     return (
-        (hardwareType === 'hidden90' || hardwareType === 'hidden180') &&
-        (
-            openingType === 'turn-tilt' ||
-            openingType === 'turn' ||
-            openingType === 'stulp'
-        )
+        (hardwareType === 'hidden180' &&
+            (openingType === 'turn-tilt' || openingType === 'turn')) ||
+        (hardwareType === 'hidden90' &&
+            (openingType === 'turn-tilt' || openingType === 'stulp'))
     );
 }
 
@@ -41,16 +39,20 @@ function updateClampSideVisibility() {
         clampSideGroup.style.display = '';
 
         if (anyChip) {
-            if (openingType === 'turn-tilt' || openingType === 'turn') {
-                anyChip.style.display = 'none';
+    const mustChooseExactSide =
+        (hardwareType === 'hidden180' && (openingType === 'turn-tilt' || openingType === 'turn')) ||
+        (hardwareType === 'hidden90' && openingType === 'turn-tilt');
 
-                if (clampSideInput.value === 'any') {
-                    setClampSide('left');
-                }
-            } else {
-                anyChip.style.display = '';
-            }
+    if (mustChooseExactSide) {
+        anyChip.style.display = 'none';
+
+        if (clampSideInput.value === 'any') {
+            setClampSide('left');
         }
+    } else {
+        anyChip.style.display = '';
+    }
+}
     } else {
         clampSideGroup.style.display = 'none';
 
