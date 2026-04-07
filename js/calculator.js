@@ -846,27 +846,49 @@ handleItems.forEach(item => resultArticles.push({ ...item }));
       }
     }
 
-    } else {
+        } else {
         showMessage(
             'Для этого типа открывания подбор ещё не реализован.',
             'error'
         );
         return null;
     }
+
+    // Фильтр KN100KR для конкретной конфигурации:
+    // П/О + Скрытая 90 + стандартные ручки Classic / Concise
+    const isHidden90TurnTilt =
+    openingType === 'turn-tilt' &&
+    hardwareType === 'hidden90';
+
+const isStandardHandle =
+    handleType === 'classic_standard' ||
+    handleType === 'concise_standard';
+
+const filteredArticles = (isHidden90TurnTilt && isStandardHandle)
+    ? resultArticles.filter(item =>
+        !(item.article === 'KN100KR')
+      )
+    : resultArticles;
+
         return {
-  height: h,
-  width: w,
-  weight: wt,
-  openingType,
-  hardwareType,
-  profileType: profileTypeInput.value,
-  hingeColor: hingeColorInput.value,
-  liftSlideHandleType: liftSlideHandleTypeSelect.value,
-  isStulpAlutech: openingType === 'stulp' && profileTypeInput.value === 'alutech' &&
-  (hardwareType === 'visible' || hardwareType === 'hidden90' || hardwareType === 'hidden180'),
-  clampSide,
-  handleType,
-  handleColor,
-  items: resultArticles
-};
+                height: h,
+                width: w,
+                weight: wt,
+                openingType,
+                hardwareType,
+                profileType: profileTypeInput.value,
+                hingeColor: hingeColorInput.value,
+                liftSlideHandleType: liftSlideHandleTypeSelect.value,
+                isStulpAlutech:
+                        openingType === 'stulp' &&
+                        profileTypeInput.value === 'alutech' &&
+                        (hardwareType === 'visible' ||
+                         hardwareType === 'hidden90' ||
+                         hardwareType === 'hidden180'),
+                clampSide,
+                handleType,
+                handleColor,
+                items: filteredArticles
+        };
 }
+
