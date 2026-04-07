@@ -3488,16 +3488,14 @@ const hingeColorArticlesStulp = {
       { article: 'KN219FM-R', name: 'Петля ПО скрытая 160 кг нижняя прав', qty: 1 },
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
       { article: 'KN219FM-L', name: 'Петля ПО скрытая 160 кг нижняя лев', qty: 1 },
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3509,8 +3507,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3518,8 +3515,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3531,8 +3527,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3540,8 +3535,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3553,8 +3547,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 3 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3562,8 +3555,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 3 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
 ];
@@ -3675,8 +3667,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3684,8 +3675,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN400FS', name: 'Приподниматель створки поворотной', qty: 1 },
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3698,8 +3688,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 1 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3708,8 +3697,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 1 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3722,8 +3710,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3732,8 +3719,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 2 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
   {
@@ -3746,8 +3732,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 3 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
     articlesLeft: [
       { article: 'KN219FO-L', name: 'Петля Пов скрытая верхняя 180º лев', qty: 1 },
@@ -3756,8 +3741,7 @@ const hingeColorArticlesStulp = {
       { article: 'KN100KY', name: 'Отв.планка штульп.шпингалета (арт. KN100KY)', qty: 2 },
       { article: 'KN100WH', name: 'Скрытый прижим регулируемый винтом', qty: 3 },
       { article: 'KN604BZ', name: 'Ограничитель открывания створки', qty: 1 },
-      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 1 },
-      { article: 'KN208AE', name: 'Шпингалет штульп.створки низ (арт. KN208AE)', qty: 1 },
+      { article: 'KN208AD', name: 'Шпингалет штульп.створки верх (арт. KN208AD)', qty: 2 },
     ],
   },
 ];
