@@ -4,6 +4,10 @@ const isTelegramWebApp =
     typeof tg.close === 'function' &&
     !!tg.initData;
 
+if (isTelegramWebApp) {
+    document.documentElement.classList.add('is-telegram-miniapp');
+}
+
 function getOpeningTypeLabel(value) {
     if (value === 'turn-tilt') return 'Поворотно-откидное окно';
     if (value === 'turn') return 'Поворотное окно';
