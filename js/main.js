@@ -2,7 +2,6 @@ const isTelegramWebApp =
     !!tg &&
     typeof tg.sendData === 'function' &&
     typeof tg.close === 'function' &&
-    !!tg.initData;
 
 if (isTelegramWebApp) {
     document.documentElement.classList.add('is-telegram-miniapp');
