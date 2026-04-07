@@ -52,54 +52,52 @@ function renderSavedWindows() {
     }).join('');
 }
 
-saveBtn.addEventListener('click', () => {
-    const hardwareResult = calculateHardware();
-    if (!hardwareResult) return;
+if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+        const hardwareResult = calculateHardware();
+        if (!hardwareResult) return;
 
-    // Предупреждение про ограничитель сразу при записи окна
-    const oType = String(hardwareResult.openingType);
-    const hType = String(hardwareResult.hardwareType);
-    const wgt = Number(hardwareResult.weight);
+        const oType = String(hardwareResult.openingType);
+        const hType = String(hardwareResult.hardwareType);
+        const wgt = Number(hardwareResult.weight);
 
-    const isHidden180 = hType === 'hidden180';
-    const inWeightRange = wgt >= 131 && wgt <= 210;
-    const isTurnTilt = oType === 'turn-tilt';
-    const isTurn = oType === 'turn';
+        const isHidden180 = hType === 'hidden180';
+        const inWeightRange = wgt >= 131 && wgt <= 210;
+        const isTurnTilt = oType === 'turn-tilt';
+        const isTurn = oType === 'turn';
 
-    if (isHidden180 && inWeightRange && (isTurnTilt || isTurn)) {
-        let angleWarningText;
+        if (isHidden180 && inWeightRange && (isTurnTilt || isTurn)) {
+            let angleWarningText;
 
-        if (isTurnTilt) {
-            angleWarningText =
-                'Внимание! В поворотно-откидном или откидно-поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
-                'установка Ограничителя открывания створки обязательна!';
-        } else {
-            angleWarningText =
-                'Внимание! В поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
-                'установка Ограничителя открывания створки обязательна!';
+            if (isTurnTilt) {
+                angleWarningText =
+                    'Внимание! В поворотно-откидном или откидно-поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
+                    'установка Ограничителя открывания створки обязательна!';
+            } else {
+                angleWarningText =
+                    'Внимание! В поворотном режиме, при типе фурнитуры Tilt First, а так же, при весе створки от 131 кг до 210 кг ' +
+                    'установка Ограничителя открывания створки обязательна!';
+            }
+
+            if (angleWarningOverlay && angleWarningOkBtn) {
+                angleWarningOverlay.querySelector('.modal-text').textContent = angleWarningText;
+                angleWarningOverlay.style.display = 'flex';
+
+                angleWarningOkBtn.onclick = null;
+                angleWarningOkBtn.onclick = () => {
+                    angleWarningOverlay.style.display = 'none';
+                    finalizeSave(hardwareResult);
+                };
+
+                return;
+            } else {
+                showMessage(angleWarningText, 'warning');
+            }
         }
 
-        if (angleWarningOverlay && angleWarningOkBtn) {
-            angleWarningOverlay.querySelector('.modal-text').textContent = angleWarningText;
-            angleWarningOverlay.style.display = 'flex';
-
-            angleWarningOkBtn.onclick = null;
-            angleWarningOkBtn.onclick = () => {
-                angleWarningOverlay.style.display = 'none';
-                finalizeSave(hardwareResult);
-            };
-
-            return; // ждём нажатия ОК
-        } else {
-            // если по какой-то причине оверлей недоступен — хотя бы тост
-            showMessage(angleWarningText, 'warning');
-        }
-    }
-
-    // Если предупреждение не нужно — сразу сохраняем
-    finalizeSave(hardwareResult);
-});
-
+        finalizeSave(hardwareResult);
+    });
+}
 function finalizeSave(hardwareResult) {
     const qtyWindows = Number(quantityInput.value) || 1;
 
@@ -123,7 +121,8 @@ function finalizeSave(hardwareResult) {
 }
 }
 
-totalBtn.addEventListener('click', async () => {
+if (totalBtn) {
+    totalBtn.addEventListener('click', async () => {
     try {
         if (accumulatedResults.length === 0) {
             showMessage('Нет записанных расчётов. Сначала нажмите «Записать».', 'error');
@@ -163,6 +162,7 @@ totalBtn.addEventListener('click', async () => {
 
             texts.push('');
         });
+        }
 
         texts.push('ИТОГОВЫЙ СПИСОК ПО ВСЕМ ОКНАМ:');
         const finalGrouped = Array.from(summaryMap.values())
