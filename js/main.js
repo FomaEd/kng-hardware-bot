@@ -1,3 +1,11 @@
+const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+
+const isTelegramWebApp =
+    !!tg &&
+    typeof tg.sendData === 'function' &&
+    typeof tg.close === 'function' &&
+    !!tg.initData;
+
 function getOpeningTypeLabel(value) {
     if (value === 'turn-tilt') return 'Поворотно-откидное окно';
     if (value === 'turn') return 'Поворотное окно';
@@ -107,9 +115,9 @@ function finalizeSave(hardwareResult) {
     void accumulatedCounter.offsetWidth;
     accumulatedCounter.classList.add('flash');
 
-    if (tg && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred) {
-        tg.HapticFeedback.notificationOccurred('success');
-    }
+    if (isTelegramWebApp && tg.HapticFeedback && tg.HapticFeedback.notificationOccurred) {
+    tg.HapticFeedback.notificationOccurred('success');
+}
 }
 
 totalBtn.addEventListener('click', async () => {
@@ -185,7 +193,7 @@ totalBtn.addEventListener('click', async () => {
             alternativeData = Array.from(altMap.values());
         }
 
-        if (tg) {
+        if (isTelegramWebApp) {
             tg.sendData(JSON.stringify({
                 action: 'total',
                 data: excelData,
@@ -197,7 +205,6 @@ totalBtn.addEventListener('click', async () => {
         }
 
         const ok = await exportToExcel(excelData, alternativeData);
-
         if (!ok) {
             showMessage('Не удалось сформировать Excel файл.', 'error');
             return;
