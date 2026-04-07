@@ -84,7 +84,7 @@ body {
     font-size: 29px;
     font-weight: 800;
     line-height: 1;
-    color: #208080;
+    color: var(--color-primary);
 }
 
 /* только для Telegram Mini App — уменьшаем шрифт */
@@ -344,7 +344,7 @@ body {
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.1; /* было 0.06 */
+    opacity: 0.09;
 }
 
 .app-bg-logo {
@@ -355,24 +355,25 @@ body {
     object-fit: contain;
 }
 
-/* общий стиль картинок */
-.app-bg-logo {
-    width: 260px;
-    max-width: 80%;
-    justify-self: center;
-    align-self: center;
-    object-fit: contain;
-}
-
-/* разные повороты/масштаб, чтобы не было ровного штампика */
 .app-bg-logo--furk {
     transform: translateY(-10px) scale(1.08);
-    opacity: 1; /* оставить как есть */
+    opacity: 1;
+    filter: contrast(1.15) brightness(0.9);
 }
 
 .app-bg-logo--kng {
-    transform: translateY(10px) scale(0.9);
-    opacity: 0.8;
+    transform: translateY(10px) scale(0.95);
+    opacity: 0.9;
+}
+
+.app-bg-logos-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 200px;
+    gap: 56px;
+    transform: translate3d(0,0,0);
 }
 
 /* чуть сдвинем чётные строки для живости */
