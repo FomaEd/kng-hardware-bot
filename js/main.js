@@ -208,24 +208,24 @@ if (totalBtn) {
         const chatType = initDataUnsafe.chat_type || null;
         const chatInstance = initDataUnsafe.chat_instance || null;
 
-        const res = await fetch('http://5.42.115.153:3000/webapp-total', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                query_id: queryId,
-                user_id: userId,
-                chat_type: chatType,
-                chat_instance: chatInstance,
-                payload: {
-                    action: 'total',
-                    data: excelData,
-                    alternativeData: alternativeData,
-                    yellowArticles: ['KN100OH', 'KN208AH']
-                }
-            })
-        });
+        const res = await fetch('https://podborkng.ru/webapp-total', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        query_id: queryId,
+        user_id: userId,
+        chat_type: chatType,
+        chat_instance: chatInstance,
+        payload: {
+            action: 'total',
+            data: excelData,
+            alternativeData: alternativeData,
+            yellowArticles: ['KN100OH', 'KN208AH']
+        }
+    })
+});
 
         if (!res.ok) {
             throw new Error('Сервер вернул ошибку ' + res.status);
